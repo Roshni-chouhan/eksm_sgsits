@@ -17,13 +17,13 @@ import { ROLE_LABELS } from "@/lib/auth.functions";
 export const Route = createFileRoute("/_authenticated/portal")({
   head: () => ({
     meta: [
-      { title: "Member portal — KhelSankalp SGSITS" },
+      { title: "Member portal — Eklavya Khel Spardha Manch SGSITS" },
       {
         name: "description",
         content:
-          "Post sports shorts, manage role approvals and track your KhelSankalp membership at SGSITS Indore.",
+          "Post sports shorts, manage role approvals and track your Eklavya Khel Spardha Manch membership at SGSITS Indore.",
       },
-      { property: "og:title", content: "Member portal — KhelSankalp SGSITS" },
+      { property: "og:title", content: "Member portal — Eklavya Khel Spardha Manch SGSITS" },
       {
         property: "og:description",
         content: "Share match shorts and manage SGSITS sports memberships.",
@@ -93,7 +93,7 @@ function PortalPage() {
             .createSignedUrl(row.media_path, 3600);
           url = signed?.signedUrl ?? null;
         }
-        return { ...row, url, authorName: nameById.get(row.author_id) ?? "KhelSankalp member" };
+        return { ...row, url, authorName: nameById.get(row.author_id) ?? "Eklavya Khel Spardha Manch member" };
       }),
     );
     setPosts(withMedia);
@@ -167,7 +167,7 @@ function PortalPage() {
       setCaption("");
       setSport("");
       setFile(null);
-      toast.success("Posted to the KhelSankalp feed.");
+      toast.success("Posted to the Eklavya Khel Spardha Manch feed.");
       await loadFeed();
     } finally {
       setBusy(false);
@@ -199,7 +199,7 @@ function PortalPage() {
   return (
     <div>
       <PageHeader
-        eyebrow="KhelSankalp Portal"
+        eyebrow="Eklavya Khel Spardha Manch Portal"
         title={profile ? `Namaste, ${profile.full_name}` : "Member portal"}
         description="Share match shorts, follow the SGSITS sports feed and manage access requests."
       />
@@ -288,7 +288,7 @@ function PortalPage() {
                       ) : (
                         <img
                           src={post.url}
-                          alt={post.caption || "KhelSankalp sports moment"}
+                          alt={post.caption || "Eklavya Khel Spardha Manch sports moment"}
                           className="h-56 w-full object-cover"
                           loading="lazy"
                         />

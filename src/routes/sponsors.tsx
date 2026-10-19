@@ -36,7 +36,7 @@ function SponsorsPage() {
 
           <p className="mt-4 max-w-2xl text-sm leading-7 text-primary-foreground/75 sm:text-base">
             Local organizations and community partners helping tournaments,
-            athletes and grassroots sports grow.
+            Players and grassroots sports grow.
           </p>
 
         </div>
@@ -95,7 +95,7 @@ function SponsorsPage() {
                 <div className="text-center">
                   <Users className="mx-auto h-5 w-5 text-royal" />
                   <p className="mt-2 text-[11px] text-muted-foreground">
-                    Athletes
+                    Players
                   </p>
                 </div>
 
@@ -129,7 +129,7 @@ function SponsorsPage() {
               </h2>
 
               <p className="mt-2 max-w-xl text-sm leading-6 text-primary-foreground/70">
-                Connect with tournament organizers and support athletes
+                Connect with tournament organizers and support Players
                 through sports sponsorship opportunities.
               </p>
 

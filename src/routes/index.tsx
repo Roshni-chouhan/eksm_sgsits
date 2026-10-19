@@ -1,4 +1,3 @@
-import { LayoutGrid } from "lucide-react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   Trophy,
@@ -25,8 +24,9 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { StatCard } from "@/components/common/StatCard";
 import { DepartmentLeaderboard } from "@/components/common/LeaderboardTable";
+
 import {
-  AthleteCard,
+  PlayerCard,
   MatchCard,
   SportCard,
   TournamentCard,
@@ -35,7 +35,7 @@ import {
 import {
   COLLEGE,
   announcements,
-  athletes,
+  Players,
   departments,
   institutionStats,
   matches,
@@ -47,16 +47,16 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       {
-        title: "KhelSankalp SGSITS — College Sports Tournaments",
+        title: "Eklavya Khel Spardha Manch SGSITS — College Sports Tournaments",
       },
       {
         name: "description",
         content:
-          "Live scores, tournaments, athletes, teams and achievements for Shri Govindram Seksaria Institute of Technology and Science, Indore.",
+          "Live scores, tournaments, Players, teams and Facilities for Shri Govindram Seksaria Institute of Technology and Science, Indore.",
       },
       {
         property: "og:title",
-        content: "KhelSankalp — SGSITS Indore",
+        content: "Eklavya Khel Spardha Manch — SGSITS Indore",
       },
       {
         property: "og:description",
@@ -75,15 +75,14 @@ function Home() {
     .filter((t) => t.status !== "completed")
     .slice(0, 3);
 
-  const topAthletes = [...athletes]
+  const topPlayers = [...Players]
     .sort((a, b) => b.rating - a.rating)
     .slice(0, 4);
 
   return (
     <div>
-      {/* =========================================================
-          IMMERSIVE HOME PORTAL
-          ========================================================= */}
+      {/* IMMERSIVE HOME PORTAL */}
+
       <section className="relative isolate min-h-[720px] overflow-hidden bg-primary sm:min-h-[760px]">
         <img
           src={hero}
@@ -109,8 +108,7 @@ function Home() {
             </p>
 
             <h1 className="mt-3 max-w-xl font-display text-5xl leading-[0.95] text-primary-foreground sm:text-7xl">
-              KhelSankalp
-
+              Eklavya Khel Spardha Manch
               <span className="mt-3 block font-sans text-lg font-semibold uppercase tracking-[0.12em] text-primary-foreground/80 sm:text-xl">
                 Sports Tournament Management
               </span>
@@ -146,100 +144,97 @@ function Home() {
             </div>
           </div>
 
-          
-<div className="mt-auto grid gap-3 pt-12 sm:grid-cols-2 lg:grid-cols-4">
-  {[
-    {
-      icon: Trophy,
-      title: "Upcoming tournaments",
-      copy: "Fixtures, draws and registrations",
-      to: "/tournaments" as const,
-    },
-    {
-      icon: UserPlus,
-      title: "Athlete profiles",
-      copy: "Stats, medals and achievements",
-      to: "/athletes" as const,
-    },
-    {
-      icon: ShieldCheck,
-      title: "Team management",
-      copy: "Squads, coaches and performance",
-      to: "/teams" as const,
-    },
-    {
-      icon: LayoutGrid,
-      title: "Other",
-      copy: "Gallery, sponsors, campus map and facilities",
-      to: "/about" as const,
-    },
-  ].map((item) => (
-    <Link
-      key={item.title}
-      to={item.to}
-      className="group min-h-32 border border-primary-foreground/15 bg-primary/55 p-5 backdrop-blur-xl transition hover:-translate-y-1 hover:border-gold/60 hover:bg-primary/70"
-    >
-      <div className="flex items-start justify-between gap-4">
-        <item.icon className="h-7 w-7 text-gold" />
+          {/* HOMEPAGE FEATURE CARDS */}
 
-        <ArrowRight className="h-4 w-4 text-primary-foreground/50 transition group-hover:translate-x-1 group-hover:text-gold" />
-      </div>
+          <div className="mt-auto grid gap-3 pt-12 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              {
+                icon: Trophy,
+                title: "Upcoming tournaments",
+                copy: "Fixtures, draws and registrations",
+                to: "/tournaments" as const,
+              },
+              {
+                icon: UserPlus,
+                title: "Player profiles",
+                copy: "Stats, medals and achievements",
+                to: "/Players" as const,
+              },
+              {
+                icon: ShieldCheck,
+                title: "Team management",
+                copy: "Squads, coaches and performance",
+                to: "/teams" as const,
+              },
+              {
+                icon: CalendarCheck,
+                title: "Facilities",
+                copy: "Courts, grounds and time slots",
+                to: "/facilities" as const,
+              },
+            ].map((item) => (
+              <Link
+                key={item.title}
+                to={item.to}
+                className="group min-h-32 border border-primary-foreground/15 bg-primary/55 p-5 backdrop-blur-xl transition hover:-translate-y-1 hover:border-gold/60 hover:bg-primary/70"
+              >
+                <div className="flex items-start justify-between gap-4">
+                  <item.icon className="h-7 w-7 text-gold" />
+                  <ArrowRight className="h-4 w-4 text-primary-foreground/50 transition group-hover:translate-x-1 group-hover:text-gold" />
+                </div>
 
-      <p className="mt-5 font-semibold text-primary-foreground">
-        {item.title}
-      </p>
+                <p className="mt-5 font-semibold text-primary-foreground">
+                  {item.title}
+                </p>
 
-      <p className="mt-1 text-xs text-primary-foreground/60">
-        {item.copy}
-      </p>
-    </Link>
-  ))}
-</div>
-</div>
-</section>
+                <p className="mt-1 text-xs text-primary-foreground/60">
+                  {item.copy}
+                </p>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
 
-{/* =========================================================
-    STATS
-    ========================================================= */}
-<section className="mx-auto mt-8 max-w-7xl px-4">
-  <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-    <StatCard
-      icon={Users}
-      label="Registered athletes"
-      value={`${institutionStats.athletes}+`}
-      hint="Across 9 sports"
-    />
+      {/* STATS */}
 
-    <StatCard
-      icon={Trophy}
-      label="Tournaments"
-      value={institutionStats.tournaments}
-      hint="This academic session"
-      accent="gold"
-    />
+      <section className="mx-auto mt-8 max-w-7xl px-4">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <StatCard
+            icon={Users}
+            label="Registered Players"
+            value={`${institutionStats.Players}+`}
+            hint="Across 9 sports"
+          />
 
-    <StatCard
-      icon={Radio}
-      label="Live right now"
-      value={institutionStats.liveMatches}
-      hint="Ball-by-ball updates"
-      accent="live"
-    />
+          <StatCard
+            icon={Trophy}
+            label="Tournaments"
+            value={institutionStats.tournaments}
+            hint="This academic session"
+            accent="gold"
+          />
 
-    <StatCard
-      icon={Medal}
-      label="Medals awarded"
-      value={institutionStats.medalsAwarded}
-      hint="Department championship"
-      accent="primary"
-    />
-  </div>
-</section>
+          <StatCard
+            icon={Radio}
+            label="Live right now"
+            value={institutionStats.liveMatches}
+            hint="Ball-by-ball updates"
+            accent="live"
+          />
 
+          <StatCard
+            icon={Medal}
+            label="Medals awarded"
+            value={institutionStats.medalsAwarded}
+            hint="Department championship"
+            accent="primary"
+          />
+        </div>
+      </section>
 
-      {/* =========================================================
-          LIVE
-          ========================================================= */}
+      {/* LIVE MATCHES */}
+
       <section className="mx-auto mt-20 max-w-7xl px-4">
         <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 sm:flex sm:justify-between">
           <div className="min-w-0">
@@ -275,9 +270,8 @@ function Home() {
         </div>
       </section>
 
-      {/* =========================================================
-          TOURNAMENTS
-          ========================================================= */}
+      {/* TOURNAMENTS */}
+
       <section className="mx-auto mt-20 max-w-7xl px-4">
         <h2 className="text-2xl font-bold text-primary sm:text-3xl">
           Featured tournaments
@@ -295,13 +289,12 @@ function Home() {
         </div>
       </section>
 
-      {/* =========================================================
-          SPORTS
-          ========================================================= */}
+      {/* SPORTS */}
+
       <section className="mx-auto mt-20 max-w-7xl px-4">
         <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 sm:flex sm:justify-between">
           <h2 className="min-w-0 text-2xl font-bold text-primary sm:text-3xl">
-            campus sports
+            Campus sports
           </h2>
 
           <Button asChild variant="ghost">
@@ -319,9 +312,8 @@ function Home() {
         </div>
       </section>
 
-      {/* =========================================================
-          NEW SPORTS MANAGEMENT MODULES
-          ========================================================= */}
+      {/* SPORTS MANAGEMENT MODULES */}
+
       <section className="ks-home-tools mt-20">
         <div className="ks-container">
           <div className="ks-section-heading">
@@ -329,7 +321,7 @@ function Home() {
               <p className="ks-eyebrow">SPORTS MANAGEMENT</p>
 
               <h2 className="ks-section-title">
-                Everything athletes and organisers need
+                Everything Players and organisers need
               </h2>
 
               <p className="ks-section-description">
@@ -372,9 +364,8 @@ function Home() {
         </div>
       </section>
 
-      {/* =========================================================
-          CALENDAR QUICK ACCESS
-          ========================================================= */}
+      {/* CALENDAR QUICK ACCESS */}
+
       <section className="mx-auto mt-20 max-w-7xl px-4">
         <Card className="glass-card overflow-hidden">
           <div className="flex flex-col gap-6 p-7 sm:flex-row sm:items-center sm:justify-between sm:p-8">
@@ -403,9 +394,8 @@ function Home() {
         </Card>
       </section>
 
-      {/* =========================================================
-          SPLIT BANNER
-          ========================================================= */}
+      {/* SPLIT BANNER */}
+
       <section className="mx-auto mt-20 max-w-7xl px-4">
         <Card className="glass-card overflow-hidden p-0 md:grid md:grid-cols-2">
           <img
@@ -429,12 +419,12 @@ function Home() {
             />
 
             <h2 className="mt-5 text-2xl font-bold text-primary sm:text-3xl">
-              One ecosystem for every athlete on campus
+              One ecosystem for every Player on campus
             </h2>
 
             <p className="mt-3 text-sm text-muted-foreground">
               From your first departmental trial to a digitally verifiable
-              championship certificate, KhelSankalp tracks every match, stat,
+              championship certificate, Eklavya Khel Spardha Manch tracks every match, stat,
               medal and achievement of your SGSITS career.
             </p>
 
@@ -443,7 +433,7 @@ function Home() {
                 asChild
                 className="gradient-royal text-primary-foreground"
               >
-                <Link to="/athletes">Browse athletes</Link>
+                <Link to="/Players">Browse Players</Link>
               </Button>
 
               <Button asChild variant="outline">
@@ -454,9 +444,8 @@ function Home() {
         </Card>
       </section>
 
-      {/* =========================================================
-          LEADERBOARD + ANNOUNCEMENTS
-          ========================================================= */}
+      {/* LEADERBOARD AND ANNOUNCEMENTS */}
+
       <section className="mx-auto mt-20 max-w-7xl px-4">
         <div className="grid gap-8 lg:grid-cols-[1.6fr_1fr]">
           <div className="min-w-0">
@@ -485,17 +474,11 @@ function Home() {
                     {a.category}
                   </Badge>
 
-                  <p className="mt-1 font-semibold text-primary">
-                    {a.title}
-                  </p>
+                  <p className="mt-1 font-semibold text-primary">{a.title}</p>
 
-                  <p className="text-sm text-muted-foreground">
-                    {a.body}
-                  </p>
+                  <p className="text-sm text-muted-foreground">{a.body}</p>
 
-                  <p className="text-xs text-muted-foreground">
-                    {a.date}
-                  </p>
+                  <p className="text-xs text-muted-foreground">{a.date}</p>
                 </Card>
               ))}
             </div>
@@ -503,17 +486,16 @@ function Home() {
         </div>
       </section>
 
-      {/* =========================================================
-          TOP ATHLETES
-          ========================================================= */}
+      {/* TOP PlayerS */}
+
       <section className="mx-auto mt-20 max-w-7xl px-4">
         <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 sm:flex sm:justify-between">
           <h2 className="min-w-0 text-2xl font-bold text-primary sm:text-3xl">
-            Top rated athletes
+            Top rated Players
           </h2>
 
           <Button asChild variant="ghost">
-            <Link to="/athletes">
+            <Link to="/Players">
               Full roster
               <ArrowRight className="ml-1.5 h-4 w-4" />
             </Link>
@@ -521,15 +503,14 @@ function Home() {
         </div>
 
         <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {topAthletes.map((a) => (
-            <AthleteCard key={a.id} athlete={a} />
+          {topPlayers.map((a) => (
+            <PlayerCard key={a.id} Player={a} />
           ))}
         </div>
       </section>
 
-      {/* =========================================================
-          CTA
-          ========================================================= */}
+      {/* CALL TO ACTION */}
+
       <section className="mx-auto mt-20 max-w-7xl px-4">
         <Card className="relative overflow-hidden border-0 gradient-royal p-10 text-center">
           <h2 className="relative text-2xl font-bold text-primary-foreground sm:text-3xl">
@@ -565,9 +546,8 @@ function Home() {
         </Card>
       </section>
 
-      {/* =========================================================
-          COLLEGE INFO
-          ========================================================= */}
+      {/* COLLEGE INFORMATION */}
+
       <section className="mx-auto mt-20 max-w-7xl px-4">
         <div className="flex flex-wrap items-center justify-center gap-6 rounded-2xl border border-border bg-surface px-6 py-8 text-center text-sm text-muted-foreground">
           <span className="flex items-center gap-2">
@@ -590,9 +570,7 @@ function Home() {
   );
 }
 
-/* =========================================================
-   HOME FEATURE CARD
-   ========================================================= */
+/* HOME FEATURE CARD */
 
 function HomeFeature({
   icon,
@@ -606,18 +584,11 @@ function HomeFeature({
   href: string;
 }) {
   return (
-    <Link
-      to={href}
-      className="ks-home-feature group"
-    >
+    <Link to={href} className="ks-home-feature group">
       <div>
-        <div className="ks-home-feature-icon">
-          {icon}
-        </div>
+        <div className="ks-home-feature-icon">{icon}</div>
 
-        <h3 className="mt-5 text-lg font-bold">
-          {title}
-        </h3>
+        <h3 className="mt-5 text-lg font-bold">{title}</h3>
 
         <p className="mt-2 text-sm leading-6 text-muted-foreground">
           {description}
@@ -626,7 +597,6 @@ function HomeFeature({
 
       <div className="flex items-center gap-2 text-sm font-semibold text-primary">
         Explore
-
         <ArrowRight
           size={16}
           className="transition-transform group-hover:translate-x-1"

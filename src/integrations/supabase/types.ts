@@ -205,7 +205,7 @@ export type Database = {
     }
     Enums: {
       app_role: "
-      " | "sports_head" | "core_team" | "athlete"
+      " | "sports_head" | "core_team" | "Player"
       role_status: "pending" | "approved" | "rejected"
     }
     CompositeTypes: {
@@ -334,7 +334,7 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
-      app_role: ["superadmin", "sports_head", "core_team", "athlete"],
+      app_role: ["superadmin", "sports_head", "core_team", "Player"],
       role_status: ["pending", "approved", "rejected"],
     },
   },

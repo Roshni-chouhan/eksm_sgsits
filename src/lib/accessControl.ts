@@ -20,7 +20,7 @@ export interface AccessRequest {
   reviewedAt?: string;
 }
 
-const STORAGE_KEY = "khelsankalp_access_requests";
+const STORAGE_KEY = "Eklavya Khel Spardha Manch_access_requests";
 
 export function getAccessRequests(): AccessRequest[] {
   if (typeof window === "undefined") return [];

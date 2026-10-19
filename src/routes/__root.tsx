@@ -27,7 +27,7 @@ function NotFoundComponent() {
         </h2>
 
         <p className="mt-2 text-sm text-muted-foreground">
-          This corner of the KhelSankalp ecosystem doesn't
+          This corner of the Eklavya Khel Spardha Manch ecosystem doesn't
           exist.
         </p>
 
@@ -103,12 +103,12 @@ export const Route =
         },
         {
           title:
-            "KhelSankalp — SGSITS Indore Sports Ecosystem",
+            "Eklavya Khel Spardha Manch — SGSITS Indore Sports Ecosystem",
         },
         {
           name: "description",
           content:
-            "Official sports ecosystem of SGSITS Indore with tournaments, athletes, teams, fixtures and live scores.",
+            "Official sports ecosystem of SGSITS Indore with tournaments, Players, teams, fixtures and live scores.",
         },
       ],
 

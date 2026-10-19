@@ -10,9 +10,9 @@ export function Footer() {
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 md:grid-cols-2 lg:grid-cols-4">
         <div>
           <div className="flex items-center gap-3">
-            <img src={logo} alt="KhelSankalp emblem" width={48} height={48} loading="lazy" className="h-12 w-12" />
+            <img src={logo} alt="Eklavya Khel Spardha Manch emblem" width={48} height={48} loading="lazy" className="h-12 w-12" />
             <div>
-              <p className="font-display text-lg font-bold text-primary">KhelSankalp</p>
+              <p className="font-display text-lg font-bold text-primary">Eklavya Khel Spardha Manch</p>
               <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
                 {COLLEGE.short} Indore
               </p>
@@ -28,7 +28,7 @@ export function Footer() {
             <li><Link to="/tournaments" className="hover:text-primary">Tournaments</Link></li>
             <li><Link to="/sports" className="hover:text-primary">Sports</Link></li>
             <li><Link to="/teams" className="hover:text-primary">Teams</Link></li>
-            <li><Link to="/athletes" className="hover:text-primary">Athletes</Link></li>
+            <li><Link to="/Players" className="hover:text-primary">Players</Link></li>
             <li><Link to="/certificates" className="hover:text-primary">Certificate verification</Link></li>
           </ul>
         </div>
@@ -39,8 +39,8 @@ export function Footer() {
             <li><Link to="/facilities" className="hover:text-primary">Facilities & booking</Link></li>
             <li><Link to="/campus-map" className="hover:text-primary">Campus sports map</Link></li>
             <li><Link to="/explore" className="hover:text-primary">Explore & search</Link></li>
-            <li><Link to="/dashboard" className="hover:text-primary">Athlete / Coach / Organizer portals</Link></li>
-            <li><Link to="/about" className="hover:text-primary">About KhelSankalp</Link></li>
+            <li><Link to="/dashboard" className="hover:text-primary">Player / Coach / Organizer portals</Link></li>
+            <li><Link to="/about" className="hover:text-primary">About Eklavya Khel Spardha Manch</Link></li>
           </ul>
         </div>
 
@@ -66,7 +66,7 @@ export function Footer() {
         </div>
       </div>
       <div className="border-t border-border py-5 text-center text-xs text-muted-foreground">
-        © {new Date().getFullYear()} {COLLEGE.name} · KhelSankalp digital sports ecosystem ·
+        © {new Date().getFullYear()} {COLLEGE.name} · Eklavya Khel Spardha Manch digital sports ecosystem ·
         {" "}{COLLEGE.sportsCouncil}
       </div>
     </footer>

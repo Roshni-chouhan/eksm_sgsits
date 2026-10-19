@@ -12,7 +12,6 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AboutRouteImport } from './routes/about'
-import { Route as AthletesRouteImport } from './routes/athletes'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as CalendarRouteImport } from './routes/calendar'
 import { Route as CampusMapRouteImport } from './routes/campus-map'
@@ -22,6 +21,7 @@ import { Route as ExploreRouteImport } from './routes/explore'
 import { Route as FacilitiesRouteImport } from './routes/facilities'
 import { Route as FixtureRouteImport } from './routes/fixture'
 import { Route as GalleryRouteImport } from './routes/gallery'
+import { Route as PlayersRouteImport } from './routes/players'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as ScheduleRouteImport } from './routes/schedule'
 import { Route as SponsorsRouteImport } from './routes/sponsors'
@@ -48,11 +48,6 @@ const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AthletesRoute = AthletesRouteImport.update({
-  id: '/athletes',
-  path: '/athletes',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthRoute = AuthRouteImport.update({
@@ -98,6 +93,11 @@ const FixtureRoute = FixtureRouteImport.update({
 const GalleryRoute = GalleryRouteImport.update({
   id: '/gallery',
   path: '/gallery',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PlayersRoute = PlayersRouteImport.update({
+  id: '/players',
+  path: '/players',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ResetPasswordRoute = ResetPasswordRouteImport.update({
@@ -171,7 +171,6 @@ const TournamentsTournamentIdRoute = TournamentsTournamentIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/athletes': typeof AthletesRouteWithChildren
   '/auth': typeof AuthRoute
   '/calendar': typeof CalendarRoute
   '/campus-map': typeof CampusMapRoute
@@ -181,6 +180,7 @@ export interface FileRoutesByFullPath {
   '/facilities': typeof FacilitiesRoute
   '/fixture': typeof FixtureRoute
   '/gallery': typeof GalleryRoute
+  '/players': typeof PlayersRoute
   '/reset-password': typeof ResetPasswordRoute
   '/schedule': typeof ScheduleRoute
   '/sponsors': typeof SponsorsRoute
@@ -198,7 +198,6 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/athletes': typeof AthletesRouteWithChildren
   '/auth': typeof AuthRoute
   '/calendar': typeof CalendarRoute
   '/campus-map': typeof CampusMapRoute
@@ -208,6 +207,7 @@ export interface FileRoutesByTo {
   '/facilities': typeof FacilitiesRoute
   '/fixture': typeof FixtureRoute
   '/gallery': typeof GalleryRoute
+  '/players': typeof PlayersRoute
   '/reset-password': typeof ResetPasswordRoute
   '/schedule': typeof ScheduleRoute
   '/sponsors': typeof SponsorsRoute
@@ -227,7 +227,6 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/about': typeof AboutRoute
-  '/athletes': typeof AthletesRouteWithChildren
   '/auth': typeof AuthRoute
   '/calendar': typeof CalendarRoute
   '/campus-map': typeof CampusMapRoute
@@ -237,6 +236,7 @@ export interface FileRoutesById {
   '/facilities': typeof FacilitiesRoute
   '/fixture': typeof FixtureRoute
   '/gallery': typeof GalleryRoute
+  '/players': typeof PlayersRoute
   '/reset-password': typeof ResetPasswordRoute
   '/schedule': typeof ScheduleRoute
   '/sponsors': typeof SponsorsRoute
@@ -256,7 +256,6 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
-    | '/athletes'
     | '/auth'
     | '/calendar'
     | '/campus-map'
@@ -266,6 +265,7 @@ export interface FileRouteTypes {
     | '/facilities'
     | '/fixture'
     | '/gallery'
+    | '/players'
     | '/reset-password'
     | '/schedule'
     | '/sponsors'
@@ -283,7 +283,6 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/about'
-    | '/athletes'
     | '/auth'
     | '/calendar'
     | '/campus-map'
@@ -293,6 +292,7 @@ export interface FileRouteTypes {
     | '/facilities'
     | '/fixture'
     | '/gallery'
+    | '/players'
     | '/reset-password'
     | '/schedule'
     | '/sponsors'
@@ -311,7 +311,6 @@ export interface FileRouteTypes {
     | '/'
     | '/_authenticated'
     | '/about'
-    | '/athletes'
     | '/auth'
     | '/calendar'
     | '/campus-map'
@@ -321,6 +320,7 @@ export interface FileRouteTypes {
     | '/facilities'
     | '/fixture'
     | '/gallery'
+    | '/players'
     | '/reset-password'
     | '/schedule'
     | '/sponsors'
@@ -340,7 +340,6 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AboutRoute: typeof AboutRoute
-  AthletesRoute: typeof AthletesRouteWithChildren
   AuthRoute: typeof AuthRoute
   CalendarRoute: typeof CalendarRoute
   CampusMapRoute: typeof CampusMapRoute
@@ -350,6 +349,7 @@ export interface RootRouteChildren {
   FacilitiesRoute: typeof FacilitiesRoute
   FixtureRoute: typeof FixtureRoute
   GalleryRoute: typeof GalleryRoute
+  PlayersRoute: typeof PlayersRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
   ScheduleRoute: typeof ScheduleRoute
   SponsorsRoute: typeof SponsorsRoute
@@ -379,13 +379,6 @@ declare module '@tanstack/react-router' {
       path: '/about'
       fullPath: '/about'
       preLoaderRoute: typeof AboutRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/athletes': {
-      id: '/athletes'
-      path: '/athletes'
-      fullPath: '/athletes'
-      preLoaderRoute: typeof AthletesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/auth': {
@@ -449,6 +442,13 @@ declare module '@tanstack/react-router' {
       path: '/gallery'
       fullPath: '/gallery'
       preLoaderRoute: typeof GalleryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/players': {
+      id: '/players'
+      path: '/players'
+      fullPath: '/players'
+      preLoaderRoute: typeof PlayersRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/reset-password': {
@@ -560,18 +560,6 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
 const AuthenticatedRouteRouteWithChildren =
   AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
 
-interface AthletesRouteChildren {
-  AthletesAthleteIdRoute: typeof AthletesAthleteIdRoute
-}
-
-const AthletesRouteChildren: AthletesRouteChildren = {
-  AthletesAthleteIdRoute: AthletesAthleteIdRoute,
-}
-
-const AthletesRouteWithChildren = AthletesRoute._addFileChildren(
-  AthletesRouteChildren,
-)
-
 interface SportsRouteChildren {
   SportsSportIdRoute: typeof SportsSportIdRoute
 }
@@ -609,7 +597,6 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AboutRoute: AboutRoute,
-  AthletesRoute: AthletesRouteWithChildren,
   AuthRoute: AuthRoute,
   CalendarRoute: CalendarRoute,
   CampusMapRoute: CampusMapRoute,
@@ -619,6 +606,7 @@ const rootRouteChildren: RootRouteChildren = {
   FacilitiesRoute: FacilitiesRoute,
   FixtureRoute: FixtureRoute,
   GalleryRoute: GalleryRoute,
+  PlayersRoute: PlayersRoute,
   ResetPasswordRoute: ResetPasswordRoute,
   ScheduleRoute: ScheduleRoute,
   SponsorsRoute: SponsorsRoute,

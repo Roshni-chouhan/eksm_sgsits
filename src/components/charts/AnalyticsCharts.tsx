@@ -32,7 +32,7 @@ const tooltipStyle = {
   fontSize: 12,
 };
 
-export function ParticipationChart({ data }: { data: { month: string; athletes: number; matches: number }[] }) {
+export function ParticipationChart({ data }: { data: { month: string; Players: number; matches: number }[] }) {
   return (
     <ResponsiveContainer width="100%" height={260}>
       <AreaChart data={data} margin={{ left: -18, right: 8, top: 8 }}>
@@ -46,7 +46,7 @@ export function ParticipationChart({ data }: { data: { month: string; athletes: 
         <XAxis dataKey="month" tick={AXIS} axisLine={false} tickLine={false} />
         <YAxis tick={AXIS} axisLine={false} tickLine={false} />
         <Tooltip contentStyle={tooltipStyle} />
-        <Area type="monotone" dataKey="athletes" stroke="var(--color-chart-1)" fill="url(#ath)" strokeWidth={2.5} />
+        <Area type="monotone" dataKey="Players" stroke="var(--color-chart-1)" fill="url(#ath)" strokeWidth={2.5} />
       </AreaChart>
     </ResponsiveContainer>
   );

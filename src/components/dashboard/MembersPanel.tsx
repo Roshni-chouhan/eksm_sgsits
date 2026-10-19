@@ -64,7 +64,7 @@ export function MembersPanel() {
         <div>
           <h2 className="text-base font-semibold">Registered members</h2>
           <p className="text-xs text-muted-foreground">
-            Everyone signed up on KhelSankalp with their role status.
+            Everyone signed up on Eklavya Khel Spardha Manch with their role status.
           </p>
         </div>
         <Input

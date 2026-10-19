@@ -1,4 +1,4 @@
-CREATE TYPE public.app_role AS ENUM ('superadmin','sports_head','core_team','athlete');
+CREATE TYPE public.app_role AS ENUM ('superadmin','sports_head','core_team','Player');
 CREATE TYPE public.role_status AS ENUM ('pending','approved','rejected');
 
 CREATE TABLE public.profiles (
@@ -43,7 +43,7 @@ CREATE OR REPLACE FUNCTION public.enforce_role_status()
 RETURNS trigger LANGUAGE plpgsql SECURITY DEFINER SET search_path = public AS $$
 BEGIN
   IF NOT public.has_role(auth.uid(), 'superadmin') THEN
-    NEW.status := CASE WHEN NEW.role = 'athlete' THEN 'approved'::public.role_status ELSE 'pending'::public.role_status END;
+    NEW.status := CASE WHEN NEW.role = 'Player' THEN 'approved'::public.role_status ELSE 'pending'::public.role_status END;
     NEW.approved_by := NULL;
   END IF;
   RETURN NEW;

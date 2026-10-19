@@ -9,7 +9,7 @@ import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   certificates,
-  getAthlete,
+  getPlayer,
   getTeam,
   matches,
   sportIcon,
@@ -19,52 +19,52 @@ import {
 
 export const Route = createFileRoute("/athletes/$athleteId")({
   loader: ({ params }) => {
-    const athlete = getAthlete(params.athleteId);
-    if (!athlete) throw notFound();
-    return { athlete };
+    const Player = getPlayer(params.PlayerId);
+    if (!Player) throw notFound();
+    return { Player };
   },
   head: ({ loaderData }) => {
     if (!loaderData) {
-      return { meta: [{ title: "Athlete not found — KhelSankalp" }, { name: "robots", content: "noindex" }] };
+      return { meta: [{ title: "Player not found — Eklavya Khel Spardha Manch" }, { name: "robots", content: "noindex" }] };
     }
-    const a = loaderData.athlete;
+    const a = loaderData.Player;
     const desc = `${a.name}, ${a.department} — ${a.position}. ${a.matches} matches, ${a.medals.gold} gold medals at SGSITS Indore.`;
     return {
       meta: [
-        { title: `${a.name} — Athlete Profile | KhelSankalp SGSITS` },
+        { title: `${a.name} — Player Profile | Eklavya Khel Spardha Manch SGSITS` },
         { name: "description", content: desc },
-        { property: "og:title", content: `${a.name} — KhelSankalp SGSITS` },
+        { property: "og:title", content: `${a.name} — Eklavya Khel Spardha Manch SGSITS` },
         { property: "og:description", content: desc },
       ],
     };
   },
-  component: AthleteProfile,
+  component: PlayerProfile,
 });
 
-function AthleteProfile() {
-  const { athlete } = Route.useLoaderData();
-  const team = getTeam(athlete.teamId);
-  const athleteCerts = certificates.filter((c) => c.athlete === athlete.name);
-  const relatedTournaments = tournaments.filter((t) => t.sport === athlete.sport);
-  const relatedMatches = matches.filter((m) => m.sport === athlete.sport);
+function PlayerProfile() {
+  const { Player } = Route.useLoaderData();
+  const team = getTeam(Player.teamId);
+  const PlayerCerts = certificates.filter((c) => c.Player === Player.name);
+  const relatedTournaments = tournaments.filter((t) => t.sport === Player.sport);
+  const relatedMatches = matches.filter((m) => m.sport === Player.sport);
 
   return (
     <div>
       <PageHeader
-        eyebrow={`${sportIcon(athlete.sport)} ${sportName(athlete.sport)} · ${athlete.year}`}
-        title={athlete.name}
-        description={`${athlete.position} · ${athlete.department} · Enrollment ${athlete.enrollment}`}
-        actions={<Badge className="border-0 gradient-gold text-gold-foreground">Rating {athlete.rating}</Badge>}
+        eyebrow={`${sportIcon(Player.sport)} ${sportName(Player.sport)} · ${Player.year}`}
+        title={Player.name}
+        description={`${Player.position} · ${Player.department} · Enrollment ${Player.enrollment}`}
+        actions={<Badge className="border-0 gradient-gold text-gold-foreground">Rating {Player.rating}</Badge>}
       />
       <div className="mx-auto max-w-7xl px-4 py-10">
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <StatCard icon={Target} label="Matches played" value={athlete.matches} />
-          <StatCard icon={TrendingUp} label="Wins" value={athlete.wins} accent="primary" />
-          <StatCard icon={Award} label="Career points" value={athlete.points} accent="royal" />
+          <StatCard icon={Target} label="Matches played" value={Player.matches} />
+          <StatCard icon={TrendingUp} label="Wins" value={Player.wins} accent="primary" />
+          <StatCard icon={Award} label="Career points" value={Player.points} accent="royal" />
           <StatCard
             icon={Medal}
             label="Medals"
-            value={`${athlete.medals.gold}G ${athlete.medals.silver}S ${athlete.medals.bronze}B`}
+            value={`${Player.medals.gold}G ${Player.medals.silver}S ${Player.medals.bronze}B`}
             accent="gold"
           />
         </div>
@@ -83,7 +83,7 @@ function AthleteProfile() {
               <h3 className="text-lg font-bold text-primary">Recent form</h3>
               <p className="text-sm text-muted-foreground">Last six competitive outings</p>
               <div className="mt-4">
-                <FormLineChart data={athlete.form} />
+                <FormLineChart data={Player.form} />
               </div>
             </Card>
             <Card className="glass-card gap-4 p-6">
@@ -91,25 +91,25 @@ function AthleteProfile() {
               <div>
                 <div className="flex justify-between text-sm">
                   <span className="text-muted-foreground">Training attendance</span>
-                  <span className="font-semibold text-primary">{athlete.attendance}%</span>
+                  <span className="font-semibold text-primary">{Player.attendance}%</span>
                 </div>
-                <Progress value={athlete.attendance} className="mt-2 h-2" />
+                <Progress value={Player.attendance} className="mt-2 h-2" />
               </div>
               <div>
                 <div className="flex justify-between text-sm">
                   <span className="text-muted-foreground">Win rate</span>
                   <span className="font-semibold text-primary">
-                    {Math.round((athlete.wins / athlete.matches) * 100)}%
+                    {Math.round((Player.wins / Player.matches) * 100)}%
                   </span>
                 </div>
-                <Progress value={(athlete.wins / athlete.matches) * 100} className="mt-2 h-2" />
+                <Progress value={(Player.wins / Player.matches) * 100} className="mt-2 h-2" />
               </div>
               <div className="flex flex-wrap gap-2 pt-2">
-                <Badge variant="secondary">{sportName(athlete.sport)}</Badge>
-                {athlete.secondarySport ? (
-                  <Badge variant="secondary">{sportName(athlete.secondarySport)}</Badge>
+                <Badge variant="secondary">{sportName(Player.sport)}</Badge>
+                {Player.secondarySport ? (
+                  <Badge variant="secondary">{sportName(Player.secondarySport)}</Badge>
                 ) : null}
-                <Badge variant="secondary">{athlete.department}</Badge>
+                <Badge variant="secondary">{Player.department}</Badge>
               </div>
             </Card>
           </TabsContent>
@@ -169,7 +169,7 @@ function AthleteProfile() {
           </TabsContent>
 
           <TabsContent value="achievements" className="mt-6 grid gap-4 md:grid-cols-2">
-            {athlete.achievements.map((a) => (
+            {Player.achievements.map((a) => (
               <Card key={a} className="glass-card flex-row items-start gap-3 p-5">
                 <Award className="mt-0.5 h-5 w-5 shrink-0 text-gold" />
                 <p className="text-sm text-foreground">{a}</p>
@@ -178,8 +178,8 @@ function AthleteProfile() {
           </TabsContent>
 
           <TabsContent value="certificates" className="mt-6 grid gap-4 md:grid-cols-2">
-            {athleteCerts.length ? (
-              athleteCerts.map((c) => (
+            {PlayerCerts.length ? (
+              PlayerCerts.map((c) => (
                 <Card key={c.id} className="glass-card gap-2 p-6">
                   <div className="flex items-start justify-between gap-3">
                     <div className="min-w-0">

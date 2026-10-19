@@ -8,7 +8,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { athletes, getTournament, matchesByTournament } from "@/data/mock";
+import { Players, getTournament, matchesByTournament } from "@/data/mock";
 
 export const Route = createFileRoute("/tournaments/$tournamentId")({
   loader: ({ params }) => {
@@ -18,14 +18,14 @@ export const Route = createFileRoute("/tournaments/$tournamentId")({
   },
   head: ({ loaderData }) => {
     if (!loaderData) {
-      return { meta: [{ title: "Tournament not found — KhelSankalp" }, { name: "robots", content: "noindex" }] };
+      return { meta: [{ title: "Tournament not found — Eklavya Khel Spardha Manch" }, { name: "robots", content: "noindex" }] };
     }
     const t = loaderData.tournament;
     return {
       meta: [
-        { title: `${t.name} — KhelSankalp SGSITS` },
+        { title: `${t.name} — Eklavya Khel Spardha Manch SGSITS` },
         { name: "description", content: t.description },
-        { property: "og:title", content: `${t.name} — KhelSankalp SGSITS` },
+        { property: "og:title", content: `${t.name} — Eklavya Khel Spardha Manch SGSITS` },
         { property: "og:description", content: t.description },
       ],
     };
@@ -37,7 +37,7 @@ function TournamentDetail() {
   const { tournament } = Route.useLoaderData();
   const fixtures = matchesByTournament(tournament.id);
   const live = fixtures.filter((m) => m.status === "live");
-  const topScorers = [...athletes]
+  const topScorers = [...Players]
     .filter((a) => a.sport === tournament.sport)
     .sort((a, b) => b.points - a.points);
 
@@ -154,7 +154,7 @@ function TournamentDetail() {
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead>Athlete</TableHead>
+                    <TableHead>Player</TableHead>
                     <TableHead>Department</TableHead>
                     <TableHead className="text-center">Matches</TableHead>
                     <TableHead className="text-center">Wins</TableHead>

@@ -9,12 +9,12 @@ import { departments, sports, teams } from "@/data/mock";
 export const Route = createFileRoute("/teams")({
   head: () => ({
     meta: [
-      { title: "Teams — KhelSankalp SGSITS" },
+      { title: "Teams — Eklavya Khel Spardha Manch SGSITS" },
       {
         name: "description",
         content: "Departmental and hostel squads competing across SGSITS Indore tournaments.",
       },
-      { property: "og:title", content: "Teams — KhelSankalp SGSITS" },
+      { property: "og:title", content: "Teams — Eklavya Khel Spardha Manch SGSITS" },
       { property: "og:description", content: "Squads, captains, coaches and season records." },
     ],
   }),

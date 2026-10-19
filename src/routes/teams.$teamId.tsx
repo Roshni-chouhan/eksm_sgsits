@@ -7,7 +7,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
-  athletes,
+  Players,
   getTeam,
   matches,
   sportIcon,
@@ -23,15 +23,15 @@ export const Route = createFileRoute("/teams/$teamId")({
   },
   head: ({ loaderData }) => {
     if (!loaderData) {
-      return { meta: [{ title: "Team not found — KhelSankalp" }, { name: "robots", content: "noindex" }] };
+      return { meta: [{ title: "Team not found — Eklavya Khel Spardha Manch" }, { name: "robots", content: "noindex" }] };
     }
     const t = loaderData.team;
     const desc = `${t.name} (${t.department}) — captained by ${t.captain}, coached by ${t.coach}. ${t.won} wins from ${t.played} matches.`;
     return {
       meta: [
-        { title: `${t.name} — Team Profile | KhelSankalp SGSITS` },
+        { title: `${t.name} — Team Profile | Eklavya Khel Spardha Manch SGSITS` },
         { name: "description", content: desc },
-        { property: "og:title", content: `${t.name} — KhelSankalp SGSITS` },
+        { property: "og:title", content: `${t.name} — Eklavya Khel Spardha Manch SGSITS` },
         { property: "og:description", content: desc },
       ],
     };
@@ -41,7 +41,7 @@ export const Route = createFileRoute("/teams/$teamId")({
 
 function TeamProfile() {
   const { team } = Route.useLoaderData();
-  const squad = athletes.filter((a) => a.teamId === team.id);
+  const squad = Players.filter((a) => a.teamId === team.id);
   const teamMatches = matches.filter((m) => m.teamA === team.name || m.teamB === team.name);
   const sessions = trainingSessions.filter((s) => s.team === team.name);
 
@@ -85,7 +85,7 @@ function TeamProfile() {
                 </Card>
               );
               return profile ? (
-                <Link key={player} to="/athletes/$athleteId" params={{ athleteId: profile.id }}>
+                <Link key={player} to="/Players/$PlayerId" params={{ PlayerId: profile.id }}>
                   {inner}
                 </Link>
               ) : (

@@ -1,7 +1,17 @@
-import { createFileRoute, useNavigate, useRouter } from "@tanstack/react-router";
+
+import {
+  createFileRoute,
+  useNavigate,
+  useRouter,
+} from "@tanstack/react-router";
 import { useState } from "react";
 import { toast } from "sonner";
-import { GraduationCap, ShieldCheck, Trophy, Users } from "lucide-react";
+import {
+  GraduationCap,
+  ShieldCheck,
+  Trophy,
+  Users,
+} from "lucide-react";
 
 import { PageHeader } from "@/components/common/PageHeader";
 import { Button } from "@/components/ui/button";
@@ -34,22 +44,23 @@ export const Route = createFileRoute("/auth")({
   head: () => ({
     meta: [
       {
-        title: "Role sign-in & registration — KhelSankalp SGSITS",
+        title:
+          "Role sign-in & registration — Eklavya Khel Spardha Manch SGSITS",
       },
       {
         name: "description",
         content:
-          "Separate KhelSankalp desks for SGSITS athletes, sports core team members, the institute sports head and the super admin — register or sign in to your own dashboard.",
+          "Separate Eklavya Khel Spardha Manch desks for SGSITS Players, sports core team members, the Institute Sports Committee and the super admin.",
       },
       {
         property: "og:title",
         content:
-          "Role sign-in & registration — KhelSankalp SGSITS",
+          "Role sign-in & registration — Eklavya Khel Spardha Manch SGSITS",
       },
       {
         property: "og:description",
         content:
-          "Athlete, core team, institute sports head and super admin desks for KhelSankalp at SGSITS Indore.",
+          "Player, core team, Institute Sports Committee and super admin desks at SGSITS Indore.",
       },
       {
         property: "og:type",
@@ -87,10 +98,17 @@ const YEARS = [
   "Post graduate",
 ];
 
+// Institute Sports Committee / faculty designations
 const DESIGNATIONS = [
-  "Institute Sports Head",
+  "Institute Sports Committee",
   "Head of Department",
-  "Sports President / Co-ordinator",
+];
+
+// Super Admin designations
+const SUPERADMIN_DESIGNATIONS = [
+  "Deputy Director Physical Education",
+  "Sports President",
+  "Director",
 ];
 
 type Desk = {
@@ -113,8 +131,8 @@ type Desk = {
 
 const DESKS: Desk[] = [
   {
-    role: "athlete",
-    title: "Athlete",
+    role: "Player",
+    title: "Player",
     blurb:
       "SGSITS students who play for their branch or the institute team.",
     icon: Trophy,
@@ -124,7 +142,7 @@ const DESKS: Desk[] = [
     emailLabel: "Student email",
     emailPlaceholder: "you@sgsits.ac.in",
     note:
-      "Athlete dashboards are activated immediately after registering.",
+      "Player dashboards are activated immediately after registering.",
     tone: {
       chip: "bg-gold/25 text-gold-foreground",
       ring: "ring-gold",
@@ -143,7 +161,7 @@ const DESKS: Desk[] = [
     emailLabel: "Student email",
     emailPlaceholder: "you@sgsits.ac.in",
     note:
-      "Core team access is activated once the institute sports head approves it.",
+      "Core team access is activated once the Institute Sports Committee approves it.",
     tone: {
       chip: "bg-royal/20 text-royal",
       ring: "ring-royal",
@@ -152,7 +170,7 @@ const DESKS: Desk[] = [
   },
   {
     role: "sports_head",
-    title: "Institute Sports Head",
+    title: "Institute Sports Committee",
     blurb:
       "Faculty in charge of institute sports — signs in with the official faculty email.",
     icon: GraduationCap,
@@ -173,7 +191,7 @@ const DESKS: Desk[] = [
     role: "superadmin",
     title: "Super Admin",
     blurb:
-      "Sports council administrator for the full KhelSankalp ecosystem.",
+      "Sports council administrator for the full Eklavya Khel Spardha Manch ecosystem.",
     icon: ShieldCheck,
     kind: "faculty",
     idLabel: "Staff / employee ID",
@@ -204,10 +222,14 @@ function AuthPage() {
   const [branch, setBranch] = useState<string>(BRANCHES[0]!);
   const [year, setYear] = useState<string>(YEARS[2]!);
 
-  // Faculty designation
+  // Institute Sports Committee designation
   const [designation, setDesignation] = useState<string>(
     DESIGNATIONS[0]!,
   );
+
+  // Super Admin designation — selectable
+  const [superAdminDesignation, setSuperAdminDesignation] =
+    useState<string>("");
 
   // Core Team designation
   const [coreTeamDesignation, setCoreTeamDesignation] =
@@ -215,17 +237,14 @@ function AuthPage() {
 
   const isFaculty = desk.kind === "faculty";
   const isCoreTeam = desk.role === "core_team";
+  const isSuperAdmin = desk.role === "superadmin";
 
   function pickDesk(next: Desk) {
     setDesk(next);
     setIdentifier("");
     setPassword("");
-
-    /*
-     * Reset Core Team designation whenever the user
-     * changes the selected desk.
-     */
     setCoreTeamDesignation("");
+    setSuperAdminDesignation("");
   }
 
   async function finishSignIn(
@@ -244,7 +263,7 @@ function AuthPage() {
       return;
     }
 
-    toast.success("Welcome back to KhelSankalp");
+    toast.success("Welcome back to Eklavya Khel Spardha Manch");
 
     await router.invalidate();
 
@@ -254,7 +273,7 @@ function AuthPage() {
   }
 
   async function handleSignIn(
-    e: React.FormEvent,
+    e: React.FormEvent<HTMLFormElement>,
   ) {
     e.preventDefault();
 
@@ -289,73 +308,67 @@ function AuthPage() {
         res.refreshToken,
       );
     } catch {
-      toast.error(
-        "Something went wrong. Please try again.",
-      );
+      toast.error("Something went wrong. Please try again.");
     } finally {
       setSignInBusy(false);
     }
   }
 
   async function handleRegister(
-    e: React.FormEvent,
+    e: React.FormEvent<HTMLFormElement>,
   ) {
     e.preventDefault();
 
-    /*
-     * Core Team must select a designation.
-     */
-    if (
-      isCoreTeam &&
-      !coreTeamDesignation
-    ) {
-      toast.error(
-        "Please select your Core Team designation.",
-      );
+    if (isCoreTeam && !coreTeamDesignation) {
+      toast.error("Please select your Core Team designation.");
       return;
     }
 
-    const form = new FormData(
-      e.target as HTMLFormElement,
-    );
+    if (isSuperAdmin && !superAdminDesignation) {
+      toast.error("Please select your Super Admin designation.");
+      return;
+    }
+
+    const form = new FormData(e.currentTarget);
+
+    const fullName = String(form.get("fullName") ?? "").trim();
+    const memberId = String(form.get("memberId") ?? "").trim();
+    const email = String(form.get("email") ?? "").trim();
+    const regPassword = String(form.get("password") ?? "");
+    const phone = String(form.get("phone") ?? "").trim();
+
+    if (
+      !fullName ||
+      !memberId ||
+      !email ||
+      !regPassword ||
+      !phone
+    ) {
+      toast.error("Please complete all required fields.");
+      return;
+    }
 
     setRegBusy(true);
 
     try {
       const res = await registerMember({
         data: {
-          fullName: String(
-            form.get("fullName") ?? "",
-          ),
+          fullName,
+          rollNumber: memberId,
+          email,
+          password: regPassword,
+          phone,
 
-          rollNumber: String(
-            form.get("memberId") ?? "",
-          ),
-
-          email: String(
-            form.get("email") ?? "",
-          ),
-
-          password: String(
-            form.get("password") ?? "",
-          ),
-
-          phone: String(
-            form.get("phone") ?? "",
-          ),
-
-          year: isFaculty
-            ? designation
-            : year,
+          // Preserve the existing registration payload structure.
+          year: isSuperAdmin
+            ? superAdminDesignation
+            : isFaculty
+              ? designation
+              : year,
 
           branch,
-
           role: desk.role,
 
-          /*
-           * Send Core Team designation
-           * only when registering as Core Team.
-           */
           ...(isCoreTeam
             ? {
                 designation:
@@ -378,18 +391,15 @@ function AuthPage() {
         );
       } else {
         toast.success(
-          desk.role === "core_team"
-            ? "Request sent. The institute sports head will approve your access."
+          isCoreTeam
+            ? "Request sent. The Institute Sports Committee will approve your access."
             : "Request sent. The super admin will approve your access.",
         );
       }
 
-      /*
-       * Reset the form after successful registration.
-       */
-      (e.target as HTMLFormElement).reset();
-
+      e.currentTarget.reset();
       setCoreTeamDesignation("");
+      setSuperAdminDesignation("");
     } catch (err) {
       toast.error(
         err instanceof Error &&
@@ -412,16 +422,22 @@ function AuthPage() {
       return;
     }
 
-    await requestPasswordReset({
-      data: {
-        identifier: id,
-        origin: window.location.origin,
-      },
-    });
+    try {
+      await requestPasswordReset({
+        data: {
+          identifier: id,
+          origin: window.location.origin,
+        },
+      });
 
-    toast.success(
-      "If that account exists, a reset link is on its way by email.",
-    );
+      toast.success(
+        "If that account exists, a reset link is on its way by email.",
+      );
+    } catch {
+      toast.error(
+        "Could not request a password reset. Please try again.",
+      );
+    }
   }
 
   return (
@@ -433,9 +449,9 @@ function AuthPage() {
 
       <div className="relative">
         <PageHeader
-          eyebrow="KhelSankalp Accounts"
+          eyebrow="Eklavya Khel Spardha Manch Accounts"
           title="Choose your desk"
-          description="Every role has its own KhelSankalp desk — register or sign in below and land straight on the dashboard built for you."
+          description="Every role has its own Eklavya Khel Spardha Manch desk — register or sign in below and land straight on the dashboard built for you."
         />
       </div>
 
@@ -461,33 +477,28 @@ function AuthPage() {
                   aria-hidden="true"
                   className={`pointer-events-none absolute -right-10 -top-10 h-28 w-28 rounded-full bg-gradient-to-br to-transparent blur-2xl transition-opacity ${d.tone.glow}${
                     active
-                      ? "opacity-100"
-                      : "opacity-50 group-hover:opacity-90"
+                      ? " opacity-100"
+                      : " opacity-50 group-hover:opacity-90"
                   }`}
                 />
 
                 <span
                   className={`relative mb-3 inline-flex h-10 w-10 items-center justify-center rounded-xl ${d.tone.chip}`}
                 >
-                  <Icon
-                    className="h-5 w-5"
-                    aria-hidden="true"
-                  />
+                  <Icon className="h-5 w-5" aria-hidden="true" />
                 </span>
 
-                <p className="relative font-semibold">
-                  {d.title}
-                </p>
+                <p className="relative font-semibold">{d.title}</p>
 
                 <p className="relative mt-1 text-xs text-muted-foreground">
                   {d.blurb}
                 </p>
 
-                {active ? (
+                {active && (
                   <span className="relative mt-3 inline-block rounded-full bg-primary px-2.5 py-0.5 text-[11px] font-medium text-primary-foreground">
                     Selected desk
                   </span>
-                ) : null}
+                )}
               </button>
             );
           })}
@@ -495,59 +506,36 @@ function AuthPage() {
 
         <Tabs defaultValue="signin">
           <TabsList className="w-full bg-secondary/70">
-            <TabsTrigger
-              value="signin"
-              className="flex-1"
-            >
+            <TabsTrigger value="signin" className="flex-1">
               {desk.title} sign in
             </TabsTrigger>
-
-            <TabsTrigger
-              value="register"
-              className="flex-1"
-            >
+            <TabsTrigger value="register" className="flex-1">
               {desk.title} registration
             </TabsTrigger>
           </TabsList>
 
-          {/* =========================
-              SIGN IN
-          ========================= */}
-          <TabsContent
-            value="signin"
-            className="mt-6"
-          >
+          {/* SIGN IN */}
+          <TabsContent value="signin" className="mt-6">
             <Card className="glass-card mx-auto max-w-xl overflow-hidden p-0">
               <div className="gradient-royal px-6 py-4">
                 <p className="text-sm font-semibold text-primary-foreground">
                   {desk.title} sign in
                 </p>
-
                 <p className="text-xs text-primary-foreground/80">
                   {desk.note}
                 </p>
               </div>
 
               <div className="p-6">
-                <form
-                  className="space-y-4"
-                  onSubmit={handleSignIn}
-                >
+                <form className="space-y-4" onSubmit={handleSignIn}>
                   <div className="space-y-2">
                     <Label htmlFor="identifier">
-                      {isFaculty
-                        ? desk.emailLabel
-                        : desk.idLabel}
+                      {isFaculty ? desk.emailLabel : desk.idLabel}
                     </Label>
-
                     <Input
                       id="identifier"
                       value={identifier}
-                      onChange={(e) =>
-                        setIdentifier(
-                          e.target.value,
-                        )
-                      }
+                      onChange={(e) => setIdentifier(e.target.value)}
                       placeholder={
                         isFaculty
                           ? desk.emailPlaceholder
@@ -559,19 +547,12 @@ function AuthPage() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="password">
-                      Password
-                    </Label>
-
+                    <Label htmlFor="password">Password</Label>
                     <Input
                       id="password"
                       type="password"
                       value={password}
-                      onChange={(e) =>
-                        setPassword(
-                          e.target.value,
-                        )
-                      }
+                      onChange={(e) => setPassword(e.target.value)}
                       required
                       maxLength={72}
                     />
@@ -583,9 +564,7 @@ function AuthPage() {
                       disabled={signInBusy}
                       className="gradient-royal text-primary-foreground"
                     >
-                      {signInBusy
-                        ? "Signing in…"
-                        : "Sign in"}
+                      {signInBusy ? "Signing in…" : "Sign in"}
                     </Button>
 
                     <Button
@@ -601,13 +580,8 @@ function AuthPage() {
             </Card>
           </TabsContent>
 
-          {/* =========================
-              REGISTRATION
-          ========================= */}
-          <TabsContent
-            value="register"
-            className="mt-6"
-          >
+          {/* REGISTRATION */}
+          <TabsContent value="register" className="mt-6">
             <Card className="glass-card border-t-4 border-t-gold p-6">
               <form
                 className="space-y-4"
@@ -615,12 +589,8 @@ function AuthPage() {
                 key={desk.role}
               >
                 <div className="grid gap-4 sm:grid-cols-2">
-                  {/* Full Name */}
                   <div className="space-y-2">
-                    <Label htmlFor="fullName">
-                      Full name
-                    </Label>
-
+                    <Label htmlFor="fullName">Full name</Label>
                     <Input
                       id="fullName"
                       name="fullName"
@@ -629,47 +599,31 @@ function AuthPage() {
                     />
                   </div>
 
-                  {/* ID */}
                   <div className="space-y-2">
-                    <Label htmlFor="memberId">
-                      {desk.idLabel}
-                    </Label>
-
+                    <Label htmlFor="memberId">{desk.idLabel}</Label>
                     <Input
                       id="memberId"
                       name="memberId"
                       required
                       maxLength={30}
-                      placeholder={
-                        desk.idPlaceholder
-                      }
+                      placeholder={desk.idPlaceholder}
                     />
                   </div>
 
-                  {/* Email */}
                   <div className="space-y-2">
-                    <Label htmlFor="email">
-                      {desk.emailLabel}
-                    </Label>
-
+                    <Label htmlFor="email">{desk.emailLabel}</Label>
                     <Input
                       id="email"
                       name="email"
                       type="email"
                       required
                       maxLength={255}
-                      placeholder={
-                        desk.emailPlaceholder
-                      }
+                      placeholder={desk.emailPlaceholder}
                     />
                   </div>
 
-                  {/* Password */}
                   <div className="space-y-2">
-                    <Label htmlFor="regPassword">
-                      Password
-                    </Label>
-
+                    <Label htmlFor="regPassword">Password</Label>
                     <Input
                       id="regPassword"
                       name="password"
@@ -680,38 +634,25 @@ function AuthPage() {
                     />
                   </div>
 
-                  {/* Branch */}
                   <div className="space-y-2">
                     <Label>
-                      {isFaculty
-                        ? "Department"
-                        : "Branch"}
+                      {isFaculty ? "Department" : "Branch"}
                     </Label>
-
-                    <Select
-                      value={branch}
-                      onValueChange={setBranch}
-                    >
+                    <Select value={branch} onValueChange={setBranch}>
                       <SelectTrigger>
-                        <SelectValue />
+                        <SelectValue placeholder="Select department" />
                       </SelectTrigger>
-
                       <SelectContent>
-                        {BRANCHES.map((b) => (
-                          <SelectItem
-                            key={b}
-                            value={b}
-                          >
-                            {b}
+                        {BRANCHES.map((item) => (
+                          <SelectItem key={item} value={item}>
+                            {item}
                           </SelectItem>
                         ))}
                       </SelectContent>
                     </Select>
                   </div>
 
-                  {/* ==================================
-                      DESIGNATION / YEAR
-                  ================================== */}
+                  {/* SEPARATE DESIGNATION / YEAR DROPDOWNS */}
                   <div className="space-y-2">
                     <Label>
                       {isCoreTeam
@@ -721,73 +662,63 @@ function AuthPage() {
                           : "Year of study"}
                     </Label>
 
-                    {/* CORE TEAM DESIGNATION */}
                     {isCoreTeam ? (
                       <Select
                         value={coreTeamDesignation}
-                        onValueChange={
-                          setCoreTeamDesignation
-                        }
+                        onValueChange={setCoreTeamDesignation}
                       >
                         <SelectTrigger>
                           <SelectValue placeholder="Select designation" />
                         </SelectTrigger>
-
                         <SelectContent>
-                          {CORE_TEAM_DESIGNATIONS.map(
-                            (item) => (
-                              <SelectItem
-                                key={item}
-                                value={item}
-                              >
-                                {item}
-                              </SelectItem>
-                            ),
-                          )}
+                          {CORE_TEAM_DESIGNATIONS.map((item) => (
+                            <SelectItem key={item} value={item}>
+                              {item}
+                            </SelectItem>
+                          ))}
                         </SelectContent>
                       </Select>
-                    ) : isFaculty ? (
-                      /* FACULTY DESIGNATION */
+                    ) : isSuperAdmin ? (
                       <Select
-                        value={designation}
-                        onValueChange={
-                          setDesignation
-                        }
+                        value={superAdminDesignation}
+                        onValueChange={setSuperAdminDesignation}
                       >
                         <SelectTrigger>
-                          <SelectValue />
+                          <SelectValue placeholder="Select designation" />
                         </SelectTrigger>
-
                         <SelectContent>
-                          {DESIGNATIONS.map(
-                            (d) => (
-                              <SelectItem
-                                key={d}
-                                value={d}
-                              >
-                                {d}
-                              </SelectItem>
-                            ),
-                          )}
+                          {SUPERADMIN_DESIGNATIONS.map((item) => (
+                            <SelectItem key={item} value={item}>
+                              {item}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    ) : desk.role === "sports_head" ? (
+                      <Select
+                        value={designation}
+                        onValueChange={setDesignation}
+                      >
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select designation" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {DESIGNATIONS.map((item) => (
+                            <SelectItem key={item} value={item}>
+                              {item}
+                            </SelectItem>
+                          ))}
                         </SelectContent>
                       </Select>
                     ) : (
-                      /* ATHLETE YEAR */
-                      <Select
-                        value={year}
-                        onValueChange={setYear}
-                      >
+                      <Select value={year} onValueChange={setYear}>
                         <SelectTrigger>
-                          <SelectValue />
+                          <SelectValue placeholder="Select year" />
                         </SelectTrigger>
-
                         <SelectContent>
-                          {YEARS.map((y) => (
-                            <SelectItem
-                              key={y}
-                              value={y}
-                            >
-                              {y}
+                          {YEARS.map((item) => (
+                            <SelectItem key={item} value={item}>
+                              {item}
                             </SelectItem>
                           ))}
                         </SelectContent>
@@ -795,12 +726,8 @@ function AuthPage() {
                     )}
                   </div>
 
-                  {/* Phone */}
                   <div className="space-y-2 sm:col-span-2">
-                    <Label htmlFor="phone">
-                      Contact number
-                    </Label>
-
+                    <Label htmlFor="phone">Contact number</Label>
                     <Input
                       id="phone"
                       name="phone"
@@ -811,32 +738,27 @@ function AuthPage() {
                   </div>
                 </div>
 
-                {/* Core Team information */}
-                {isCoreTeam ? (
+                {isCoreTeam && (
                   <div className="rounded-xl border border-royal/20 bg-royal/5 p-4">
                     <p className="text-sm font-semibold text-royal">
                       Sports Core Team
                     </p>
-
                     <p className="mt-1 text-xs leading-5 text-muted-foreground">
-                      Select the responsibility you will
-                      handle within the KhelSankalp Core Team.
-                      Your designation will be displayed on
-                      your dashboard after approval.
+                      Select the responsibility you will handle within the
+                      Eklavya Khel Spardha Manch Core Team. Your designation
+                      will be displayed on your dashboard after approval.
                     </p>
                   </div>
-                ) : null}
+                )}
 
-                <p className="text-xs text-muted-foreground">
-                  {desk.note}
-                </p>
+                <p className="text-xs text-muted-foreground">{desk.note}</p>
 
                 <Button
                   type="submit"
                   disabled={
                     regBusy ||
-                    (isCoreTeam &&
-                      !coreTeamDesignation)
+                    (isCoreTeam && !coreTeamDesignation) ||
+                    (isSuperAdmin && !superAdminDesignation)
                   }
                 >
                   {regBusy

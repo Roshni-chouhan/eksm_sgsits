@@ -10,13 +10,13 @@ import { facilities, sportName } from "@/data/mock";
 export const Route = createFileRoute("/campus-map")({
   head: () => ({
     meta: [
-      { title: "Campus Sports Map — KhelSankalp SGSITS" },
+      { title: "Campus Sports Map — Eklavya Khel Spardha Manch SGSITS" },
       {
         name: "description",
         content:
           "Interactive map of sports facilities on the SGSITS Indore campus.",
       },
-      { property: "og:title", content: "Campus Sports Map — KhelSankalp SGSITS" },
+      { property: "og:title", content: "Campus Sports Map — Eklavya Khel Spardha Manch SGSITS" },
       {
         property: "og:description",
         content: "Locate sports facilities on the SGSITS Indore campus.",

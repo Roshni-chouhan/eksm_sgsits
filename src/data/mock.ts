@@ -1,6 +1,6 @@
 import type {
   Announcement,
-  Athlete,
+  Player,
   Certificate,
   Department,
   Equipment,
@@ -18,7 +18,7 @@ export const COLLEGE = {
   city: "Indore, Madhya Pradesh",
   established: 1952,
   sanskrit: "योगः कर्मसु कौशलम्।",
-  tagline: "Excellence in action. Every sport. Every athlete. Every achievement.",
+  tagline: "Excellence in action. Every sport. Every Player. Every achievement.",
   sportsCouncil: "Eklavya Sports Competition Forum & SGSITS Students Union",
 };
 
@@ -27,7 +27,7 @@ export const sports: Sport[] = [
     id: "cricket",
     name: "Cricket",
     icon: "🏏",
-    athletes: 0,
+    Players: 0,
     teams: 0,
     tournaments: 0,
     venue: "SGSITS Main Cricket Ground",
@@ -39,7 +39,7 @@ export const sports: Sport[] = [
     id: "football",
     name: "Football",
     icon: "⚽",
-    athletes: 0,
+    Players: 0,
     teams: 0,
     tournaments: 0,
     venue: "Institute Football Field",
@@ -51,7 +51,7 @@ export const sports: Sport[] = [
     id: "basketball",
     name: "Basketball",
     icon: "🏀",
-    athletes: 0,
+    Players: 0,
     teams: 0,
     tournaments: 0,
     venue: "Open Air Basketball Court, Block C",
@@ -63,7 +63,7 @@ export const sports: Sport[] = [
     id: "volleyball",
     name: "Volleyball",
     icon: "🏐",
-    athletes: 0,
+    Players: 0,
     teams: 0,
     tournaments: 0,
     venue: "Volleyball Court, Hostel Zone",
@@ -75,7 +75,7 @@ export const sports: Sport[] = [
     id: "badminton",
     name: "Badminton",
     icon: "🏸",
-    athletes: 0,
+    Players: 0,
     teams: 0,
     tournaments: 0,
     venue: "Indoor Sports Hall — Court 1 & 2",
@@ -87,7 +87,7 @@ export const sports: Sport[] = [
     id: "table-tennis",
     name: "Table Tennis",
     icon: "🏓",
-    athletes: 0,
+    Players: 0,
     teams: 0,
     tournaments: 0,
     venue: "Indoor Sports Hall — TT Arena",
@@ -99,7 +99,7 @@ export const sports: Sport[] = [
     id: "athletics",
     name: "Athletics",
     icon: "🏃",
-    athletes: 0,
+    Players: 0,
     teams: 0,
     tournaments: 0,
     venue: "400m Institute Track",
@@ -111,7 +111,7 @@ export const sports: Sport[] = [
     id: "tennis",
     name: "Tennis",
     icon: "🎾",
-    athletes: 0,
+    Players: 0,
     teams: 0,
     tournaments: 0,
     venue: "Institute Tennis Court",
@@ -123,7 +123,7 @@ export const sports: Sport[] = [
     id: "chess",
     name: "Chess",
     icon: "♟️",
-    athletes: 0,
+    Players: 0,
     teams: 0,
     tournaments: 0,
     venue: "Seminar Hall, Student Activity Centre",
@@ -167,9 +167,9 @@ export const departments: Department[] = [
 export const teams: Team[] = [];
 
 /*
- * Demo athletes removed.
+ * Demo Players removed.
  */
-export const athletes: Athlete[] = [];
+export const Players: Player[] = [];
 
 /*
  * Demo tournaments removed.
@@ -446,17 +446,17 @@ export const trainingSessions: TrainingSession[] = [];
  */
 export const participationTrend: {
   month: string;
-  athletes: number;
+  Players: number;
   matches: number;
 }[] = [];
 
 /*
  * Derived from the master sports list.
- * No hardcoded demo athlete counts.
+ * No hardcoded demo Player counts.
  */
 export const sportPopularity = sports.map((s) => ({
   name: s.name,
-  value: s.athletes,
+  value: s.Players,
 }));
 
 /*
@@ -464,7 +464,7 @@ export const sportPopularity = sports.map((s) => ({
  * No hardcoded demo totals.
  */
 export const institutionStats = {
-  athletes: athletes.length,
+  Players: Players.length,
   teams: teams.length,
   tournaments: tournaments.length,
   facilities: facilities.length,
@@ -485,8 +485,8 @@ export const getSport = (id: string) =>
 export const getTeam = (id: string) =>
   teams.find((t) => t.id === id);
 
-export const getAthlete = (id: string) =>
-  athletes.find((a) => a.id === id);
+export const getPlayer = (id: string) =>
+  Players.find((a) => a.id === id);
 
 export const getTournament = (id: string) =>
   tournaments.find((t) => t.id === id);

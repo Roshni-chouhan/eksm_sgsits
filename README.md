@@ -2,11 +2,11 @@
 
 **Khel Sankalp** is a digital sports tournament management platform developed specifically for **Shri Govindram Seksaria Institute of Technology and Science (SGSITS), Indore**.
 
-The system provides a centralized platform for managing college sports tournaments, athletes, teams, fixtures, live matches, results, facilities, announcements, achievements and sports-related activities.
+The system provides a centralized platform for managing college sports tournaments, Players, teams, fixtures, live matches, results, facilities, announcements, achievements and sports-related activities.
 
 > **योगः कर्मसु कौशलम्।**
 >
-> *Excellence in action. Every sport. Every athlete. Every achievement.*
+> *Excellence in action. Every sport. Every Player. Every achievement.*
 
 ---
 
@@ -14,18 +14,18 @@ The system provides a centralized platform for managing college sports tournamen
 
 Khel Sankalp is designed to digitize and streamline the sports ecosystem of SGSITS.
 
-Instead of managing tournament information, registrations, fixtures, match results, athlete records and announcements through disconnected/manual processes, Khel Sankalp brings these activities into a unified web application.
+Instead of managing tournament information, registrations, fixtures, match results, Player records and announcements through disconnected/manual processes, Khel Sankalp brings these activities into a unified web application.
 
 The platform supports:
 
 - Sports and tournament management
-- Athlete and team management
+- Player and team management
 - Tournament registration
 - Fixture and match management
 - Live scores
 - Match events and results
 - Points tables and rankings
-- Athlete statistics and achievements
+- Player statistics and achievements
 - Digital certificates
 - Sports facilities
 - Equipment management
@@ -40,10 +40,10 @@ The platform supports:
 The primary objectives of Khel Sankalp are:
 
 1. Digitize SGSITS college sports tournament management.
-2. Provide a centralized database for athletes, teams and tournaments.
+2. Provide a centralized database for Players, teams and tournaments.
 3. Simplify tournament registration and fixture management.
 4. Provide live match scores and match information.
-5. Maintain athlete performance and achievement records.
+5. Maintain Player performance and achievement records.
 6. Provide transparent tournament results and rankings.
 7. Improve communication through announcements and notifications.
 8. Digitize sports facilities and equipment management.
@@ -63,7 +63,7 @@ Home
   ↓
 Explore Sports
   ↓
-Tournaments / Athletes / Teams
+Tournaments / Players / Teams
   ↓
 View Details
 

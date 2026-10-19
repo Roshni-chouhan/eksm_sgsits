@@ -9,13 +9,13 @@ import { sports } from "@/data/mock";
 export const Route = createFileRoute("/sports")({
   head: () => ({
     meta: [
-      { title: "Sports at SGSITS — KhelSankalp" },
+      { title: "Sports at SGSITS — Eklavya Khel Spardha Manch" },
       {
         name: "description",
         content:
           "Cricket, football, basketball, volleyball, badminton, table tennis, athletics, tennis and chess at SGSITS Indore.",
       },
-      { property: "og:title", content: "Sports at SGSITS — KhelSankalp" },
+      { property: "og:title", content: "Sports at SGSITS — Eklavya Khel Spardha Manch" },
       { property: "og:description", content: "competitive sports across the SGSITS Indore campus." },
     ],
   }),
@@ -24,12 +24,12 @@ export const Route = createFileRoute("/sports")({
 
 function SportsPage() {
   const [q, setQ] = useState("");
-  const [sort, setSort] = useState("athletes");
+  const [sort, setSort] = useState("Players");
 
   const list = useMemo(() => {
     const filtered = sports.filter((s) => s.name.toLowerCase().includes(q.toLowerCase()));
     return [...filtered].sort((a, b) =>
-      sort === "name" ? a.name.localeCompare(b.name) : b[sort as "athletes" | "teams" | "tournaments"] - a[sort as "athletes" | "teams" | "tournaments"],
+      sort === "name" ? a.name.localeCompare(b.name) : b[sort as "Players" | "teams" | "tournaments"] - a[sort as "Players" | "teams" | "tournaments"],
     );
   }, [q, sort]);
 
@@ -46,7 +46,7 @@ function SportsPage() {
           <Select value={sort} onValueChange={setSort}>
             <SelectTrigger><SelectValue /></SelectTrigger>
             <SelectContent>
-              <SelectItem value="athletes">Most athletes</SelectItem>
+              <SelectItem value="Players">Most Players</SelectItem>
               <SelectItem value="teams">Most teams</SelectItem>
               <SelectItem value="tournaments">Most tournaments</SelectItem>
               <SelectItem value="name">Name (A–Z)</SelectItem>

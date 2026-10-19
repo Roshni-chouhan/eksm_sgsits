@@ -6,7 +6,7 @@
     "date": "2026-09-28",
     "time": "09:00 AM",
     "location": "Indore, Madhya Pradesh",
-    "description": "Local football tournament connecting grassroots teams and athletes."
+    "description": "Local football tournament connecting grassroots teams and Players."
   },
   {
     "id": "event-2",
@@ -15,6 +15,6 @@
     "date": "2026-10-04",
     "time": "10:00 AM",
     "location": "Indore, Madhya Pradesh",
-    "description": "Open badminton tournament for local athletes and emerging players."
+    "description": "Open badminton tournament for local Players and emerging players."
   }
 ]

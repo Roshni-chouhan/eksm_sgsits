@@ -10,13 +10,13 @@ import { COLLEGE, institutionStats, sports } from "@/data/mock";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About KhelSankalp — SGSITS Indore Sports Council" },
+      { title: "About Eklavya Khel Spardha Manch — SGSITS Indore Sports Council" },
       {
         name: "description",
         content:
-          "KhelSankalp is the official digital sports ecosystem of Shri Govindram Seksaria Institute of Technology and Science, Indore.",
+          "Eklavya Khel Spardha Manch is the official digital sports ecosystem of Shri Govindram Seksaria Institute of Technology and Science, Indore.",
       },
-      { property: "og:title", content: "About KhelSankalp — SGSITS Indore" },
+      { property: "og:title", content: "About Eklavya Khel Spardha Manch — SGSITS Indore" },
       {
         property: "og:description",
         content: "The story, mission and structure of sport at SGSITS Indore.",
@@ -31,7 +31,7 @@ function AboutPage() {
     <div>
       <PageHeader
         eyebrow={COLLEGE.sportsCouncil}
-        title="About KhelSankalp"
+        title="About Eklavya Khel Spardha Manch"
         description={`The official digital sports ecosystem of ${COLLEGE.name}, ${COLLEGE.city}.`}
       />
       <div className="mx-auto max-w-7xl px-4 py-10">
@@ -49,10 +49,8 @@ function AboutPage() {
             <p className="mt-5 font-display text-2xl text-primary">{COLLEGE.sanskrit}</p>
             <p className="mt-2 text-sm text-muted-foreground">{COLLEGE.tagline}</p>
             <p className="mt-5 text-sm text-muted-foreground">
-              Founded in {COLLEGE.established}, SGSITS has grown into one of central India's leading
-              engineering institutes. KhelSankalp brings the same rigour to campus sport: a single
-              platform where the Sports Council runs tournaments, coaches manage squads, and every
-              athlete owns a verified record of their achievements.
+              Eklavya Khel Spardha Manch (EKSM) is a premier sports development platform under Shri G.S. Institute of Technology and Science, Indore, committed to fostering excellence across a wide spectrum of sports, including the rapidly evolving domain of eSports. 
+              EKSM embodies the values of dedication, selfmastery, perseverance, and unwavering commitment to excellence. EKSM aims to bridge tradition with modernity by creating a dynamic and inclusive sport culture that empowers athletes. The platform nurtures talent with maintained leadership, teamwork, discipline, and sportsmanship. Professionally curated tournaments, strategic institutional and industry collaborations, and innovation-driven sport initiatives form the backbone of EKSM’s vision. By integrated tech, structured competition, and mentorship, EKSM strives to develop well-rounded individuals who excel not only in sport but also in character, resilience, and strategic thinking—preparing them to compete and lead on regional, national, and global stages.
             </p>
           </div>
         </Card>
@@ -87,7 +85,7 @@ function AboutPage() {
 
         <Card className="glass-card mt-10 grid gap-6 p-8 sm:grid-cols-2 lg:grid-cols-4">
           {[
-            { k: "Athletes", v: `${institutionStats.athletes}+` },
+            { k: "Players", v: `${institutionStats.Players}+` },
             { k: "Active teams", v: institutionStats.teams },
             { k: "Tournaments / year", v: institutionStats.tournaments },
             { k: "Venues", v: institutionStats.facilities },

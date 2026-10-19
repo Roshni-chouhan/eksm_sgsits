@@ -13,13 +13,13 @@ export const Route = createFileRoute("/reset-password")({
   ssr: false,
   head: () => ({
     meta: [
-      { title: "Set a new password — KhelSankalp SGSITS" },
+      { title: "Set a new password — Eklavya Khel Spardha Manch SGSITS" },
       {
         name: "description",
-        content: "Choose a new KhelSankalp password after requesting a reset link by email.",
+        content: "Choose a new Eklavya Khel Spardha Manch password after requesting a reset link by email.",
       },
-      { property: "og:title", content: "Set a new password — KhelSankalp SGSITS" },
-      { property: "og:description", content: "Choose a new password for your KhelSankalp account." },
+      { property: "og:title", content: "Set a new password — Eklavya Khel Spardha Manch SGSITS" },
+      { property: "og:description", content: "Choose a new password for your Eklavya Khel Spardha Manch account." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -57,7 +57,7 @@ function ResetPasswordPage() {
   return (
     <div>
       <PageHeader
-        eyebrow="KhelSankalp Accounts"
+        eyebrow="Eklavya Khel Spardha Manch Accounts"
         title="Set a new password"
         description="Open this page from the reset link in your email, then choose a new password."
       />

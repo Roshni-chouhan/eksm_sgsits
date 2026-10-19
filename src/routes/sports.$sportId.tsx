@@ -2,9 +2,9 @@ import { createFileRoute, notFound } from "@tanstack/react-router";
 import { Users, Trophy, MapPin, CalendarDays } from "lucide-react";
 import { PageHeader } from "@/components/common/PageHeader";
 import { StatCard } from "@/components/common/StatCard";
-import { AthleteCard, MatchCard, TeamCard, TournamentCard } from "@/components/cards/EntityCards";
+import { PlayerCard, MatchCard, TeamCard, TournamentCard } from "@/components/cards/EntityCards";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { athletes, getSport, matches, sports, teams, tournaments } from "@/data/mock";
+import { Players, getSport, matches, sports, teams, tournaments } from "@/data/mock";
 
 export const Route = createFileRoute("/sports/$sportId")({
   loader: ({ params }) => {
@@ -14,9 +14,9 @@ export const Route = createFileRoute("/sports/$sportId")({
   },
   head: ({ loaderData }) => {
     if (!loaderData) {
-      return { meta: [{ title: "Sport not found — KhelSankalp" }, { name: "robots", content: "noindex" }] };
+      return { meta: [{ title: "Sport not found — Eklavya Khel Spardha Manch" }, { name: "robots", content: "noindex" }] };
     }
-    const title = `${loaderData.sport.name} at SGSITS — KhelSankalp`;
+    const title = `${loaderData.sport.name} at SGSITS — Eklavya Khel Spardha Manch`;
     return {
       meta: [
         { title },
@@ -32,7 +32,7 @@ export const Route = createFileRoute("/sports/$sportId")({
 function SportDetail() {
   const { sport } = Route.useLoaderData();
   const sportTeams = teams.filter((t) => t.sport === sport.id);
-  const sportAthletes = athletes.filter((a) => a.sport === sport.id || a.secondarySport === sport.id);
+  const sportPlayers = Players.filter((a) => a.sport === sport.id || a.secondarySport === sport.id);
   const sportTournaments = tournaments.filter((t) => t.sport === sport.id);
   const sportMatches = matches.filter((m) => m.sport === sport.id);
 
@@ -45,7 +45,7 @@ function SportDetail() {
       />
       <div className="mx-auto max-w-7xl px-4 py-10">
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <StatCard icon={Users} label="Athletes" value={sport.athletes} />
+          <StatCard icon={Users} label="Players" value={sport.Players} />
           <StatCard icon={Trophy} label="Teams" value={sport.teams} accent="gold" />
           <StatCard icon={CalendarDays} label="Season" value={sport.season} accent="primary" />
           <StatCard icon={MapPin} label="Home venue" value={sport.venue.split(",")[0] ?? sport.venue} accent="royal" />
@@ -55,7 +55,7 @@ function SportDetail() {
           <TabsList className="flex-wrap">
             <TabsTrigger value="tournaments">Tournaments</TabsTrigger>
             <TabsTrigger value="teams">Teams</TabsTrigger>
-            <TabsTrigger value="athletes">Athletes</TabsTrigger>
+            <TabsTrigger value="Players">Players</TabsTrigger>
             <TabsTrigger value="matches">Matches</TabsTrigger>
           </TabsList>
           <TabsContent value="tournaments" className="mt-6 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
@@ -72,11 +72,11 @@ function SportDetail() {
               <p className="text-sm text-muted-foreground">Squad lists are being finalised.</p>
             )}
           </TabsContent>
-          <TabsContent value="athletes" className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {sportAthletes.length ? (
-              sportAthletes.map((a) => <AthleteCard key={a.id} athlete={a} />)
+          <TabsContent value="Players" className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {sportPlayers.length ? (
+              sportPlayers.map((a) => <PlayerCard key={a.id} Player={a} />)
             ) : (
-              <p className="text-sm text-muted-foreground">No athletes registered yet.</p>
+              <p className="text-sm text-muted-foreground">No Players registered yet.</p>
             )}
           </TabsContent>
           <TabsContent value="matches" className="mt-6 grid gap-5 md:grid-cols-2 lg:grid-cols-3">

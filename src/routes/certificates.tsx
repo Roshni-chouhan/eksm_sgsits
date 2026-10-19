@@ -11,13 +11,13 @@ import { certificates } from "@/data/mock";
 export const Route = createFileRoute("/certificates")({
   head: () => ({
     meta: [
-      { title: "Digital Certificates & QR Verification — KhelSankalp SGSITS" },
+      { title: "Digital Certificates & QR Verification — Eklavya Khel Spardha Manch SGSITS" },
       {
         name: "description",
         content:
           "Verify SGSITS Indore sports certificates instantly using the certificate code or QR reference.",
       },
-      { property: "og:title", content: "Certificate Verification — KhelSankalp SGSITS" },
+      { property: "og:title", content: "Certificate Verification — Eklavya Khel Spardha Manch SGSITS" },
       { property: "og:description", content: "Instant QR verification of SGSITS sports certificates." },
     ],
   }),
@@ -34,8 +34,8 @@ function CertificatesPage() {
     );
     setResult(
       found
-        ? { ok: true, text: `Valid — ${found.title} awarded to ${found.athlete} (${found.tournament}).` }
-        : { ok: false, text: "No matching certificate found in the SGSITS KhelSankalp registry." },
+        ? { ok: true, text: `Valid — ${found.title} awarded to ${found.Player} (${found.tournament}).` }
+        : { ok: false, text: "No matching certificate found in the SGSITS Eklavya Khel Spardha Manch registry." },
     );
   };
 
@@ -44,7 +44,7 @@ function CertificatesPage() {
       <PageHeader
         eyebrow="Registry"
         title="Digital Certificates"
-        description="Every KhelSankalp certificate carries a QR code and a unique registry reference that anyone can verify."
+        description="Every Eklavya Khel Spardha Manch certificate carries a QR code and a unique registry reference that anyone can verify."
       />
       <div className="mx-auto max-w-7xl px-4 py-10">
         <Card className="glass-card gap-4 p-6">
@@ -81,7 +81,7 @@ function CertificatesPage() {
               <div className="flex items-start justify-between gap-3">
                 <div className="min-w-0">
                   <p className="font-semibold text-primary">{c.title}</p>
-                  <p className="truncate text-sm text-muted-foreground">{c.athlete}</p>
+                  <p className="truncate text-sm text-muted-foreground">{c.Player}</p>
                 </div>
                 <Badge variant="secondary" className="shrink-0 capitalize">{c.type}</Badge>
               </div>

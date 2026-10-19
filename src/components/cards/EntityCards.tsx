@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { sportIcon, sportName } from "@/data/mock";
-import type { Athlete, Match, Sport, Team, Tournament } from "@/types";
+import type { Player, Match, Sport, Team, Tournament } from "@/types";
 
 export function StatusBadge({ status }: { status: string }) {
   const map: Record<string, string> = {
@@ -41,7 +41,7 @@ export function SportCard({ sport }: { sport: Sport }) {
         <h3 className="mt-2 text-xl font-bold text-primary">{sport.name}</h3>
         <p className="line-clamp-2 text-sm text-muted-foreground">{sport.description}</p>
         <div className="mt-3 flex flex-wrap gap-4 text-xs text-muted-foreground">
-          <span className="flex items-center gap-1"><Users className="h-3.5 w-3.5" />{sport.athletes} athletes</span>
+          <span className="flex items-center gap-1"><Users className="h-3.5 w-3.5" />{sport.Players} Players</span>
           <span className="flex items-center gap-1"><Trophy className="h-3.5 w-3.5" />{sport.tournaments} events</span>
         </div>
       </Card>
@@ -75,37 +75,37 @@ export function TournamentCard({ tournament }: { tournament: Tournament }) {
   );
 }
 
-export function AthleteCard({ athlete }: { athlete: Athlete }) {
-  const initials = athlete.name.split(" ").map((n) => n[0]).join("");
+export function PlayerCard({ Player }: { Player: Player }) {
+  const initials = Player.name.split(" ").map((n) => n[0]).join("");
   return (
-    <Link to="/athletes/$athleteId" params={{ athleteId: athlete.id }}>
+    <Link to="/Players/$PlayerId" params={{ PlayerId: Player.id }}>
       <Card className="glass-card card-hover h-full gap-3 p-6">
         <div className="flex items-center gap-3">
           <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl gradient-royal font-display text-lg font-bold text-primary-foreground">
             {initials}
           </span>
           <div className="min-w-0">
-            <h3 className="truncate text-lg font-bold text-primary">{athlete.name}</h3>
+            <h3 className="truncate text-lg font-bold text-primary">{Player.name}</h3>
             <p className="truncate text-xs text-muted-foreground">
-              {athlete.department} · {athlete.year}
+              {Player.department} · {Player.year}
             </p>
           </div>
         </div>
         <p className="text-sm text-muted-foreground">
-          {sportIcon(athlete.sport)} {sportName(athlete.sport)} — {athlete.position}
+          {sportIcon(Player.sport)} {sportName(Player.sport)} — {Player.position}
         </p>
         <div>
           <div className="flex items-center justify-between text-xs text-muted-foreground">
             <span>Performance rating</span>
-            <span className="font-semibold text-primary">{athlete.rating}</span>
+            <span className="font-semibold text-primary">{Player.rating}</span>
           </div>
-          <Progress value={athlete.rating} className="mt-1.5 h-1.5" />
+          <Progress value={Player.rating} className="mt-1.5 h-1.5" />
         </div>
         <div className="flex items-center gap-3 text-xs text-muted-foreground">
-          <span className="flex items-center gap-1"><Medal className="h-3.5 w-3.5 text-gold" />{athlete.medals.gold}G</span>
-          <span>{athlete.medals.silver}S</span>
-          <span>{athlete.medals.bronze}B</span>
-          <span className="ml-auto">{athlete.matches} matches</span>
+          <span className="flex items-center gap-1"><Medal className="h-3.5 w-3.5 text-gold" />{Player.medals.gold}G</span>
+          <span>{Player.medals.silver}S</span>
+          <span>{Player.medals.bronze}B</span>
+          <span className="ml-auto">{Player.matches} matches</span>
         </div>
       </Card>
     </Link>

@@ -1,5 +1,4 @@
-
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "@tanstack/react-router";
 import {
   Search,
@@ -33,7 +32,6 @@ type NavGroup = {
 const navigation: (NavLink | NavGroup)[] = [
   { label: "Home", to: "/" },
   { label: "Explore", to: "/explore" },
-
   {
     label: "Sports",
     items: [
@@ -42,25 +40,19 @@ const navigation: (NavLink | NavGroup)[] = [
       { label: "Calendar", to: "/calendar", icon: CalendarDays },
     ],
   },
-
   {
-    label: "Tournaments",
-    items: [
-      { label: "All Tournaments", to: "/tournaments", icon: Trophy },
-      { label: "Teams", to: "/teams", icon: Users },
-    ],
+  label: "Tournaments",
+  items: [
+    { label: "All Tournaments", to: "/tournaments", icon: Trophy },
+    { label: "Teams", to: "/teams", icon: Users },
+    { label: "Fixtures", to: "/fixture", icon: CalendarDays },
+  ],
   },
-
-  { label: "Athletes", to: "/athletes" },
-
+  { label: "Players", to: "/players" },
   {
     label: "Other",
     items: [
-      {
-        label: "Facilities",
-        to: "/facilities",
-        icon: Building2,
-      },
+      { label: "Facilities", to: "/facilities", icon: Building2 },
       { label: "Campus Map", to: "/campus-map", icon: MapPinned },
       { label: "Gallery", to: "/gallery", icon: Camera },
       { label: "Sponsors", to: "/sponsors", icon: Handshake },
@@ -78,6 +70,7 @@ export function Navbar() {
   const [mobileGroup, setMobileGroup] = useState<string | null>(null);
   const [desktopGroup, setDesktopGroup] = useState<string | null>(null);
 
+  const desktopNavRef = useRef<HTMLElement>(null);
   const location = useLocation();
 
   const isActive = (path: string) =>
@@ -94,10 +87,42 @@ export function Navbar() {
     setDesktopGroup(null);
   };
 
+  useEffect(() => {
+    const handlePointerDown = (event: PointerEvent) => {
+      if (
+        desktopNavRef.current &&
+        !desktopNavRef.current.contains(event.target as Node)
+      ) {
+        setDesktopGroup(null);
+      }
+    };
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setDesktopGroup(null);
+        setMobileGroup(null);
+        setMobileOpen(false);
+      }
+    };
+
+    document.addEventListener("pointerdown", handlePointerDown);
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("pointerdown", handlePointerDown);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+
+  useEffect(() => {
+    setDesktopGroup(null);
+    setMobileGroup(null);
+    setMobileOpen(false);
+  }, [location.pathname]);
+
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur-xl">
       <div className="mx-auto flex h-[76px] max-w-[1440px] items-center px-4 sm:px-6 lg:px-8">
-        {/* Logo */}
         <Link
           to="/"
           className="flex shrink-0 items-center gap-3"
@@ -111,7 +136,7 @@ export function Navbar() {
 
           <div className="hidden sm:block">
             <div className="font-display text-xl font-bold leading-none text-primary">
-              KhelSankalp
+              Eklavya Khel Spardha Manch
             </div>
             <div className="mt-1 text-[10px] font-semibold tracking-[0.18em] text-muted-foreground">
               SGSITS INDORE
@@ -119,8 +144,11 @@ export function Navbar() {
           </div>
         </Link>
 
-        {/* Desktop Navigation */}
-        <nav className="ml-8 hidden flex-1 items-center justify-center gap-1 xl:flex">
+        {/* Desktop navigation */}
+        <nav
+          ref={desktopNavRef}
+          className="ml-8 hidden flex-1 items-center justify-center gap-1 xl:flex"
+        >
           {navigation.map((item) => {
             if (!isGroup(item)) {
               return (
@@ -139,24 +167,20 @@ export function Navbar() {
               );
             }
 
-            const active = groupIsActive(item);
             const open = desktopGroup === item.label;
+            const active = groupIsActive(item);
 
             return (
-              <div
-                key={item.label}
-                className="relative"
-                onMouseLeave={() => setDesktopGroup(null)}
-              >
+              <div key={item.label} className="relative">
                 <button
                   type="button"
                   aria-expanded={open}
+                  aria-haspopup="true"
                   onClick={() =>
                     setDesktopGroup(open ? null : item.label)
                   }
-                  onMouseEnter={() => setDesktopGroup(item.label)}
                   className={`inline-flex items-center gap-1 whitespace-nowrap rounded-full px-3 py-2 text-sm font-semibold transition ${
-                    active
+                    active || open
                       ? "bg-primary/10 text-primary"
                       : "text-muted-foreground hover:bg-muted hover:text-primary"
                   }`}
@@ -171,26 +195,30 @@ export function Navbar() {
                 </button>
 
                 {open && (
-                  <div className="absolute left-0 top-full z-50 mt-2 min-w-52 rounded-xl border border-border bg-background p-2 shadow-xl">
-                    {item.items.map((child) => {
-                      const Icon = child.icon;
+                  <div className="absolute left-0 top-full z-50 min-w-52 pt-2">
+                    <div className="rounded-xl border border-border bg-background p-2 shadow-xl">
+                      {item.items.map((child) => {
+                        const Icon = child.icon;
 
-                      return (
-                        <Link
-                          key={child.to}
-                          to={child.to}
-                          onClick={closeMenus}
-                          className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition ${
-                            isActive(child.to)
-                              ? "bg-primary/10 text-primary"
-                              : "text-foreground hover:bg-muted hover:text-primary"
-                          }`}
-                        >
-                          {Icon && <Icon className="h-4 w-4 shrink-0" />}
-                          {child.label}
-                        </Link>
-                      );
-                    })}
+                        return (
+                          <Link
+                            key={child.to}
+                            to={child.to}
+                            onClick={closeMenus}
+                            className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition ${
+                              isActive(child.to)
+                                ? "bg-primary/10 text-primary"
+                                : "text-foreground hover:bg-muted hover:text-primary"
+                            }`}
+                          >
+                            {Icon && (
+                              <Icon className="h-4 w-4 shrink-0" />
+                            )}
+                            {child.label}
+                          </Link>
+                        );
+                      })}
+                    </div>
                   </div>
                 )}
               </div>
@@ -198,7 +226,7 @@ export function Navbar() {
           })}
         </nav>
 
-        {/* Desktop Actions */}
+        {/* Desktop actions */}
         <div className="ml-auto hidden items-center gap-2 xl:flex">
           <button
             type="button"
@@ -219,6 +247,7 @@ export function Navbar() {
 
           <Link
             to="/auth"
+            onClick={closeMenus}
             className="ml-1 inline-flex items-center gap-2 whitespace-nowrap rounded-xl bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground shadow-sm transition hover:bg-primary/90"
           >
             <UserRound className="h-4 w-4" />
@@ -226,10 +255,13 @@ export function Navbar() {
           </Link>
         </div>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile menu button */}
         <button
           type="button"
-          onClick={() => setMobileOpen((value) => !value)}
+          onClick={() => {
+            setMobileOpen((value) => !value);
+            setMobileGroup(null);
+          }}
           className="ml-auto flex h-10 w-10 items-center justify-center rounded-xl text-primary hover:bg-muted xl:hidden"
           aria-label="Toggle menu"
           aria-expanded={mobileOpen}
@@ -242,7 +274,7 @@ export function Navbar() {
         </button>
       </div>
 
-      {/* Mobile Navigation */}
+      {/* Mobile navigation */}
       {mobileOpen && (
         <div className="border-t border-border bg-background px-4 py-4 xl:hidden">
           <nav className="grid gap-1 sm:grid-cols-2">
@@ -330,3 +362,5 @@ export function Navbar() {
     </header>
   );
 }
+
+export default Navbar;

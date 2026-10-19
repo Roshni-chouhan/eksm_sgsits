@@ -34,7 +34,7 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   announcements,
-  athletes,
+  Players,
   certificates,
   departments,
   equipment,
@@ -50,17 +50,17 @@ import {
 export const Route = createFileRoute("/dashboard")({
   head: () => ({
     meta: [
-      { title: "Role Portals — SGSITS KhelSankalp Dashboard" },
+      { title: "Role Portals — SGSITS Eklavya Khel Spardha Manch Dashboard" },
       {
         name: "description",
         content:
-          "Athlete, coach, organizer and admin portals for SGSITS Indore sports: teams, training, live scoring, registrations, certificates and analytics.",
+          "Player, coach, organizer and admin portals for SGSITS Indore sports: teams, training, live scoring, registrations, certificates and analytics.",
       },
-      { property: "og:title", content: "Role Portals — SGSITS KhelSankalp Dashboard" },
+      { property: "og:title", content: "Role Portals — SGSITS Eklavya Khel Spardha Manch Dashboard" },
       {
         property: "og:description",
         content:
-          "Manage SGSITS tournaments, athletes, training, facilities and analytics from one campus sports dashboard.",
+          "Manage SGSITS tournaments, Players, training, facilities and analytics from one campus sports dashboard.",
       },
     ],
   }),
@@ -79,7 +79,7 @@ function Panel({ title, children }: { title: string; children: React.ReactNode }
 }
 
 function DashboardPage() {
-  const athlete = athletes[0]!;
+  const Player = Players[0]!;
   const live = matches.filter((m) => m.status === "live");
   const upcoming = matches.filter((m) => m.status === "scheduled").slice(0, 3);
   const medalData = [
@@ -93,39 +93,39 @@ function DashboardPage() {
       <PageHeader
         eyebrow="SGSITS Sports Council"
         title="Role Portals"
-        description="One workspace for athletes, coaches, organizers and the sports administration of SGSITS Indore."
+        description="One workspace for Players, coaches, organizers and the sports administration of SGSITS Indore."
       />
 
       <div className="mx-auto max-w-7xl px-4 py-10">
-        <Tabs defaultValue="athlete">
+        <Tabs defaultValue="Player">
           <TabsList className="flex-wrap">
-            <TabsTrigger value="athlete">Athlete</TabsTrigger>
+            <TabsTrigger value="Player">Player</TabsTrigger>
             <TabsTrigger value="coach">Coach</TabsTrigger>
             <TabsTrigger value="organizer">Organizer</TabsTrigger>
             <TabsTrigger value="admin">Admin</TabsTrigger>
           </TabsList>
 
-          {/* ATHLETE */}
-          <TabsContent value="athlete" className="mt-8 space-y-8">
+          {/* Player */}
+          <TabsContent value="Player" className="mt-8 space-y-8">
             <div className="flex flex-wrap items-center gap-3">
-              <Badge className="bg-royal/10 text-royal">Signed in as {athlete.name}</Badge>
+              <Badge className="bg-royal/10 text-royal">Signed in as {Player.name}</Badge>
               <span className="text-sm text-muted-foreground">
-                {athlete.enrollment} · {athlete.department} · {athlete.year}
+                {Player.enrollment} · {Player.department} · {Player.year}
               </span>
             </div>
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              <StatCard icon={Activity} label="Matches played" value={athlete.matches} />
-              <StatCard icon={Trophy} label="Wins" value={athlete.wins} accent="primary" />
+              <StatCard icon={Activity} label="Matches played" value={Player.matches} />
+              <StatCard icon={Trophy} label="Wins" value={Player.wins} accent="primary" />
               <StatCard
                 icon={Medal}
                 label="Medals"
-                value={athlete.medals.gold + athlete.medals.silver + athlete.medals.bronze}
+                value={Player.medals.gold + Player.medals.silver + Player.medals.bronze}
                 accent="gold"
               />
               <StatCard
                 icon={CalendarCheck}
                 label="Training attendance"
-                value={`${athlete.attendance}%`}
+                value={`${Player.attendance}%`}
                 accent="live"
               />
             </div>
@@ -140,7 +140,7 @@ function DashboardPage() {
               <div className="space-y-6">
                 <Panel title="Achievements">
                   <ul className="space-y-3 text-sm">
-                    {athlete.achievements.map((a) => (
+                    {Player.achievements.map((a) => (
                       <li key={a} className="flex gap-2">
                         <Award className="mt-0.5 h-4 w-4 shrink-0 text-gold-foreground" />
                         <span>{a}</span>
@@ -151,7 +151,7 @@ function DashboardPage() {
                 <Panel title="My certificates">
                   <div className="space-y-3">
                     {certificates
-                      .filter((c) => c.athlete === athlete.name)
+                      .filter((c) => c.Player === Player.name)
                       .map((c) => (
                         <div
                           key={c.id}
@@ -169,8 +169,8 @@ function DashboardPage() {
                   </div>
                 </Panel>
                 <Button asChild className="w-full">
-                  <Link to="/athletes/$athleteId" params={{ athleteId: athlete.id }}>
-                    Open full athlete profile
+                  <Link to="/Players/$PlayerId" params={{ PlayerId: Player.id }}>
+                    Open full Player profile
                   </Link>
                 </Button>
               </div>
@@ -181,7 +181,7 @@ function DashboardPage() {
           <TabsContent value="coach" className="mt-8 space-y-8">
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               <StatCard icon={Users} label="Teams coached" value={3} />
-              <StatCard icon={Activity} label="Athletes" value={64} accent="primary" />
+              <StatCard icon={Activity} label="Players" value={64} accent="primary" />
               <StatCard
                 icon={CalendarCheck}
                 label="Sessions this week"
@@ -228,7 +228,7 @@ function DashboardPage() {
                 <Table>
                   <TableHeader>
                     <TableRow>
-                      <TableHead>Athlete</TableHead>
+                      <TableHead>Player</TableHead>
                       <TableHead>Dept</TableHead>
                       <TableHead>Matches</TableHead>
                       <TableHead>Rating</TableHead>
@@ -236,7 +236,7 @@ function DashboardPage() {
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {athletes.slice(0, 6).map((a) => (
+                    {Players.slice(0, 6).map((a) => (
                       <TableRow key={a.id}>
                         <TableCell className="font-medium">{a.name}</TableCell>
                         <TableCell>{a.department}</TableCell>
@@ -244,7 +244,7 @@ function DashboardPage() {
                         <TableCell>{a.rating}</TableCell>
                         <TableCell className="text-right">
                           <Button asChild size="sm" variant="ghost">
-                            <Link to="/athletes/$athleteId" params={{ athleteId: a.id }}>
+                            <Link to="/Players/$PlayerId" params={{ PlayerId: a.id }}>
                               View
                             </Link>
                           </Button>
@@ -322,7 +322,7 @@ function DashboardPage() {
           {/* ADMIN */}
           <TabsContent value="admin" className="mt-8 space-y-8">
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              <StatCard icon={Users} label="Athletes" value={institutionStats.athletes} />
+              <StatCard icon={Users} label="Players" value={institutionStats.Players} />
               <StatCard icon={ShieldCheck} label="Teams" value={institutionStats.teams} accent="primary" />
               <StatCard icon={Trophy} label="Tournaments" value={institutionStats.tournaments} accent="gold" />
               <StatCard
@@ -340,7 +340,7 @@ function DashboardPage() {
                 <MedalPieChart data={medalData} />
               </Panel>
             </div>
-            <Panel title="Athletes by sport">
+            <Panel title="Players by sport">
               <SportBarChart data={sportPopularity} />
             </Panel>
             <div className="grid gap-6 lg:grid-cols-2">

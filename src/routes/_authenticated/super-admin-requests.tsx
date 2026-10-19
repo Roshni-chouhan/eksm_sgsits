@@ -18,7 +18,7 @@ export const Route = createFileRoute("/_authenticated/super-admin-requests")({
   head: () => ({
     meta: [
       {
-        title: "Access Requests — KhelSankalp SGSITS",
+        title: "Access Requests — Eklavya Khel Spardha Manch SGSITS",
       },
       {
         name: "description",

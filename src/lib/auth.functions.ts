@@ -5,7 +5,7 @@ import { z } from "zod";
 import type { Database } from "@/integrations/supabase/types";
 
 export const REGISTRABLE_ROLES = [
-  "athlete",
+  "Player",
   "core_team",
   "sports_head",
   "superadmin",
@@ -14,15 +14,15 @@ export const REGISTRABLE_ROLES = [
 export type RegistrableRole = (typeof REGISTRABLE_ROLES)[number];
 
 export const ROLE_LABELS: Record<string, string> = {
-  athlete: "Athlete",
+  Player: "Player",
   core_team: "Sports Core Team",
-  sports_head: "Institute Sports Head",
+  sports_head: "Institute Sports Committee",
   superadmin: "Super Admin",
 };
 
 export const CORE_TEAM_DESIGNATIONS = [
   "Sports Coordinator",
-  "Core Commitee Member",
+  "Core Committee Member",
   "Treasurer",
   "Planning & Developement",
   "Media & Records and Public Relations ",
@@ -239,7 +239,7 @@ export const registerMember = createServerFn({
      * Determine role approval status
      */
     let status: "approved" | "pending" =
-      data.role === "athlete"
+      data.role === "Player"
         ? "approved"
         : "pending";
 

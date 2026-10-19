@@ -79,7 +79,7 @@ export function ApprovalsPanel({
         <div>
           <h2 className="text-base font-semibold">Pending access requests</h2>
           <p className="text-xs text-muted-foreground">
-            Approve members so they can use their KhelSankalp desk.
+            Approve members so they can use their Eklavya Khel Spardha Manch desk.
           </p>
         </div>
         <Badge variant="outline">{rows.length}</Badge>

@@ -22,13 +22,13 @@ import { sports, tournaments } from "@/data/mock";
 export const Route = createFileRoute("/tournaments")({
   head: () => ({
     meta: [
-      { title: "Tournaments — KhelSankalp SGSITS" },
+      { title: "Tournaments — Eklavya Khel Spardha Manch SGSITS" },
       {
         name: "description",
         content:
           "Every SGSITS Indore tournament: fixtures, formats, registration deadlines, live scores and points tables.",
       },
-      { property: "og:title", content: "Tournaments — KhelSankalp SGSITS" },
+      { property: "og:title", content: "Tournaments — Eklavya Khel Spardha Manch SGSITS" },
       { property: "og:description", content: "Fixtures, formats and live standings for SGSITS tournaments." },
     ],
   }),

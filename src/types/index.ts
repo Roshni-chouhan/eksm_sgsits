@@ -17,7 +17,7 @@ export interface Sport {
   id: SportId;
   name: string;
   icon: string;
-  athletes: number;
+  Players: number;
   teams: number;
   tournaments: number;
   venue: string;
@@ -50,7 +50,7 @@ export interface Team {
   founded: string;
 }
 
-export interface Athlete {
+export interface Player {
   id: string;
   name: string;
   enrollment: string;
@@ -150,7 +150,7 @@ export interface Equipment {
 
 export interface Certificate {
   id: string;
-  athlete: string;
+  Player: string;
   title: string;
   tournament: string;
   issuedOn: string;

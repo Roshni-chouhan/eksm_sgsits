@@ -16,7 +16,7 @@ export type Profile = {
 export type RoleRow = {
   id: string;
   user_id: string;
-  role: "superadmin" | "sports_head" | "core_team" | "athlete";
+  role: "superadmin" | "sports_head" | "core_team" | "Player";
   status: "pending" | "approved" | "rejected";
   created_at: string;
 };

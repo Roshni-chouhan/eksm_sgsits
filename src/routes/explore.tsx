@@ -2,23 +2,23 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { Search, Radio } from "lucide-react";
 import { PageHeader } from "@/components/common/PageHeader";
-import { AthleteCard, MatchCard, SportCard, TeamCard, TournamentCard } from "@/components/cards/EntityCards";
+import { PlayerCard, MatchCard, SportCard, TeamCard, TournamentCard } from "@/components/cards/EntityCards";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { athletes, facilities, matches, sports, teams, tournaments } from "@/data/mock";
+import { Players, facilities, matches, sports, teams, tournaments } from "@/data/mock";
 
 export const Route = createFileRoute("/explore")({
   head: () => ({
     meta: [
-      { title: "Explore & Live Scores — KhelSankalp SGSITS" },
+      { title: "Explore & Live Scores — Eklavya Khel Spardha Manch SGSITS" },
       {
         name: "description",
         content:
-          "Search every tournament, athlete, team, sport and facility at SGSITS Indore, and follow live scores in real time.",
+          "Search every tournament, Player, team, sport and facility at SGSITS Indore, and follow live scores in real time.",
       },
-      { property: "og:title", content: "Explore & Live Scores — KhelSankalp SGSITS" },
+      { property: "og:title", content: "Explore & Live Scores — Eklavya Khel Spardha Manch SGSITS" },
       { property: "og:description", content: "One search across the whole SGSITS sports ecosystem." },
     ],
   }),
@@ -32,7 +32,7 @@ function ExplorePage() {
   const results = useMemo(
     () => ({
       tournaments: tournaments.filter((t) => t.name.toLowerCase().includes(k)),
-      athletes: athletes.filter((a) => a.name.toLowerCase().includes(k) || a.department.toLowerCase().includes(k)),
+      Players: Players.filter((a) => a.name.toLowerCase().includes(k) || a.department.toLowerCase().includes(k)),
       teams: teams.filter((t) => t.name.toLowerCase().includes(k)),
       sports: sports.filter((s) => s.name.toLowerCase().includes(k)),
       facilities: facilities.filter((f) => f.name.toLowerCase().includes(k)),
@@ -48,8 +48,8 @@ function ExplorePage() {
     <div>
       <PageHeader
         eyebrow="Search everything"
-        title="Explore KhelSankalp"
-        description="Live scores, fixtures, results and one search bar across athletes, teams, tournaments, sports and facilities."
+        title="Explore Eklavya Khel Spardha Manch"
+        description="Live scores, fixtures, results and one search bar across Players, teams, tournaments, sports and facilities."
       />
       <div className="mx-auto max-w-7xl px-4 py-10">
         <div className="relative">
@@ -67,8 +67,8 @@ function ExplorePage() {
             <ResultGroup title="Tournaments" count={results.tournaments.length}>
               {results.tournaments.map((t) => <TournamentCard key={t.id} tournament={t} />)}
             </ResultGroup>
-            <ResultGroup title="Athletes" count={results.athletes.length}>
-              {results.athletes.map((a) => <AthleteCard key={a.id} athlete={a} />)}
+            <ResultGroup title="Players" count={results.Players.length}>
+              {results.Players.map((a) => <PlayerCard key={a.id} Player={a} />)}
             </ResultGroup>
             <ResultGroup title="Teams" count={results.teams.length}>
               {results.teams.map((t) => <TeamCard key={t.id} team={t} />)}

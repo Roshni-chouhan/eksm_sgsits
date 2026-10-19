@@ -23,13 +23,13 @@ import type { Facility } from "@/types";
 export const Route = createFileRoute("/facilities")({
   head: () => ({
     meta: [
-      { title: "Facilities & Booking — KhelSankalp SGSITS" },
+      { title: "Facilities & Booking — Eklavya Khel Spardha Manch SGSITS" },
       {
         name: "description",
         content:
           "Grounds, courts and the indoor hall at SGSITS Indore — availability and equipment stock.",
       },
-      { property: "og:title", content: "Facilities & Booking — KhelSankalp SGSITS" },
+      { property: "og:title", content: "Facilities & Booking — Eklavya Khel Spardha Manch SGSITS" },
       { property: "og:description", content: "Track and Issue SGSITS sports equipment inventory." },
     ],
   }),

@@ -10,13 +10,13 @@ import { ROLE_LABELS } from "@/lib/auth.functions";
 export const Route = createFileRoute("/_authenticated/my-dashboard")({
   head: () => ({
     meta: [
-      { title: "My dashboard — KhelSankalp SGSITS" },
+      { title: "My dashboard — Eklavya Khel Spardha Manch SGSITS" },
       {
         name: "description",
         content:
-          "Your KhelSankalp dashboard at SGSITS Indore: profile, role access and sports activity in one place.",
+          "Your Eklavya Khel Spardha Manch dashboard at SGSITS Indore: profile, role access and sports activity in one place.",
       },
-      { property: "og:title", content: "My dashboard — KhelSankalp SGSITS" },
+      { property: "og:title", content: "My dashboard — Eklavya Khel Spardha Manch SGSITS" },
       {
         property: "og:description",
         content: "Profile, role access and sports activity for SGSITS members.",
@@ -42,9 +42,9 @@ const PANELS: Record<string, Panel> = {
   ],
 },
   sports_head: {
-    title: "Institute sports head desk",
+    title: "Institute Sports Committee desk",
     items: [
-      "Approve core team and athlete records",
+      "Approve core team and Player records",
       "Sanction tournaments and fixtures",
       "Monitor department-wise performance",
       "Publish announcements to all members",
@@ -56,11 +56,11 @@ const PANELS: Record<string, Panel> = {
       "Manage registrations and fixtures",
       "Update live scores and match events",
       "Post match shorts and highlights",
-      "Coordinate facility bookings",
+      "Coordinate Facilitiess",
     ],
   },
-  athlete: {
-    title: "Athlete desk",
+  Player: {
+    title: "Player desk",
     items: [
       "Track your teams and tournaments",
       "View match statistics and achievements",
@@ -87,7 +87,7 @@ function MyDashboardPage() {
   return (
     <div className="container space-y-8 py-10">
       <PageHeader
-        eyebrow="KhelSankalp"
+        eyebrow="Eklavya Khel Spardha Manch"
         title={profile?.full_name ? `Welcome, ${profile.full_name}` : "My dashboard"}
         description="Your SGSITS sports profile, role access and quick actions."
       />
@@ -123,7 +123,7 @@ function MyDashboardPage() {
             <Card className="p-6">
               <h2 className="text-lg font-semibold">Approval pending</h2>
               <p className="mt-2 text-sm text-muted-foreground">
-                Your request is with the institute sports head. You will get full access as soon
+                Your request is with the Institute Sports Committee. You will get full access as soon
                 as it is approved.
               </p>
             </Card>
