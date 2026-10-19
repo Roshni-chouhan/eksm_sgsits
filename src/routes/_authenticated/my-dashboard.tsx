@@ -41,8 +41,8 @@ const PANELS: Record<string, Panel> = {
     "Approve or reject Gallery, Schedule, Fixtures and Calendar access requests",
   ],
 },
-  sports_head: {
-    title: "Institute sports head desk",
+  SportsFacultyCommittie: {
+    title: "Institute Sports faculty committie desk",
     items: [
       "Approve core team and athlete records",
       "Sanction tournaments and fixtures",
@@ -59,8 +59,8 @@ const PANELS: Record<string, Panel> = {
       "Coordinate facility bookings",
     ],
   },
-  athlete: {
-    title: "Athlete desk",
+  player: {
+    title: "player desk",
     items: [
       "Track your teams and tournaments",
       "View match statistics and achievements",

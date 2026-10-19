@@ -89,7 +89,7 @@ const YEARS = [
 
 const DESIGNATIONS = [
   "Institute Sports Head",
-  "Head of Department",
+  "tment",
   "Sports President / Co-ordinator",
 ];
 
