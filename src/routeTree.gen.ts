@@ -148,9 +148,9 @@ const AuthenticatedSuperAdminRequestsRoute =
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AthletesAthleteIdRoute = AthletesAthleteIdRouteImport.update({
-  id: '/$athleteId',
-  path: '/$athleteId',
-  getParentRoute: () => AthletesRoute,
+  id: '/athletes/$athleteId',
+  path: '/athletes/$athleteId',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const SportsSportIdRoute = SportsSportIdRouteImport.update({
   id: '/$sportId',
@@ -356,6 +356,7 @@ export interface RootRouteChildren {
   SportsRoute: typeof SportsRouteWithChildren
   TeamsRoute: typeof TeamsRouteWithChildren
   TournamentsRoute: typeof TournamentsRouteWithChildren
+  AthletesAthleteIdRoute: typeof AthletesAthleteIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -516,10 +517,10 @@ declare module '@tanstack/react-router' {
     }
     '/athletes/$athleteId': {
       id: '/athletes/$athleteId'
-      path: '/$athleteId'
+      path: '/athletes/$athleteId'
       fullPath: '/athletes/$athleteId'
       preLoaderRoute: typeof AthletesAthleteIdRouteImport
-      parentRoute: typeof AthletesRoute
+      parentRoute: typeof rootRouteImport
     }
     '/sports/$sportId': {
       id: '/sports/$sportId'
@@ -613,6 +614,7 @@ const rootRouteChildren: RootRouteChildren = {
   SportsRoute: SportsRouteWithChildren,
   TeamsRoute: TeamsRouteWithChildren,
   TournamentsRoute: TournamentsRouteWithChildren,
+  AthletesAthleteIdRoute: AthletesAthleteIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

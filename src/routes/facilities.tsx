@@ -1,9 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
+//import { useState } from "react";
 import { MapPin, Clock, Users, Package } from "lucide-react";
-import { toast } from "sonner";
+//import { toast } from "sonner";
 import { PageHeader } from "@/components/common/PageHeader";
-import { StatusBadge } from "@/components/cards/EntityCards";
+//import { StatusBadge } from "@/components/cards/EntityCards";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -17,7 +17,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { equipment, facilities, sportName } from "@/data/mock";
+import { facilities, } from "@/data/mock";
 import type { Facility } from "@/types";
 
 export const Route = createFileRoute("/facilities")({
@@ -27,16 +27,118 @@ export const Route = createFileRoute("/facilities")({
       {
         name: "description",
         content:
-          "Grounds, courts and the indoor hall at SGSITS Indore — availability and equipment stock.",
+          "Grounds, courts and the indoor hall at SGSITS Indore — availability",
       },
       { property: "og:title", content: "Facilities & Booking — Eklavya Khel Spardha Manch SGSITS" },
-      { property: "og:description", content: "Track and Issue SGSITS sports equipment inventory." },
+      {
+  property: "og:description",
+  content:
+    "Explore sports grounds, courts and indoor sports facilities at SGSITS Indore.",
+},
     ],
   }),
   component: FacilitiesPage,
 });
 
+
 function FacilitiesPage() {
+
+ const committee = [
+    { no: 1, name: "Prof. Neetesh Purohit", designation: "Director" },
+    { no: 2, name: "Prof. R.C. Gurjar", designation: "Prof. I/c Basketball" },
+    { no: 3, name: "Prof. M.L. Jain", designation: "I/c Volleyball (M/W)" },
+    { no: 4, name: "Capt. (Dr.) Manish Jaiswal", designation: "Deputy Director Physical Education" },
+    { no: 5, name: "Prof. B.S. More", designation: "Dean SSAA & I/c Chess (M)" },
+    { no: 6, name: "Prof. Nitish Gupta", designation: "I/c Kho-Kho (M/W)" },
+    { no: 7, name: "Prof. D.S. Ajnar", designation: "I/c Lawn Tennis (M/W)" },
+    { no: 8, name: "Dr. Girish G. Soni", designation: "I/c Cricket (M/W)" },
+    { no: 9, name: "Prof. R.S. Mandloi", designation: "I/c Netball (M/W)" },
+    { no: 10, name: "Dr. Nidhi Oswal", designation: "I/c Throw Ball (M/W)" },
+    { no: 11, name: "Dr. Suresh Paswan", designation: "I/c Football (M/W) & Cycling" },
+    { no: 12, name: "Dr. Mayura Kemkar", designation: "I/c Chess (W)" },
+    { no: 13, name: "Shri Arun Kuliha", designation: "I/c Badminton (M/W)" },
+    { no: 14, name: "Dr. Krishnakant Dhakad", designation: "I/c Pickle Ball & Handball (M/W)" },
+    { no: 15, name: "Dr. Vipin Kaushik", designation: "I/c Gymnasium (M/W)" },
+    { no: 16, name: "Prof. Rakesh Sagar", designation: "I/c Table Tennis (M/W)" },
+    { no: 17, name: "Prof. Ravi Jatola", designation: "I/c Kabaddi (M/W)" },
+    { no: 18, name: "Prof. Neha Patkar", designation: "I/c Aerobics & Yoga" },
+    { no: 19, name: "Prof. Prabnesh Gani", designation: "I/c Carrom" },
+    { no: 20, name: "Prof. Sharad Pandey", designation: "I/c Billiards and Snooker" },
+  ];
+
+  const studentCommittee = [
+  { no: 1, name: "Shreyansh Tiwari", designation: "Coordinator" },
+  { no: 2, name: "Drashti Baghel", designation: "Co-Coordinator" },
+  { no: 3, name: "Ayush Kushwaha", designation: "Co-Coordinator" },
+  { no: 4, name: "Mitansh Jariya", designation: "Treasurer" },
+  { no: 5, name: "Akshita Sinha", designation: "Media Head" },
+  { no: 6, name: "Prince Kumar", designation: "Media Head" },
+  { no: 7, name: "Kartikey Dwivedi", designation: "Planning & Development Manager" },
+  { no: 8, name: "Shivam Sharma", designation: "Planning & Development Manager" },
+  { no: 9, name: "Piyush Bidwal", designation: "Marketing & Sponsorship Head" },
+  { no: 10, name: "Khushi Soni", designation: "Marketing & Sponsorship Head" },
+  { no: 11, name: "Rakshit Singh", designation: "Branch Representative Head" },
+  { no: 12, name: "Kashish Mahore", designation: "Branch Representative Head" },
+  { no: 13, name: "Zeenat Khan", designation: "Culture & Creative Head" },
+  { no: 14, name: "Riya Chaturvedi", designation: "Culture & Creative Head" },
+  { no: 15, name: "Dhairya Verma", designation: "Operations & Executive Head" },
+];
+
+   const outdoorGames = [
+    { name: "Cricket", type: "Team Sport", icon: "🏏" },
+    { name: "Football", type: "Team Sport", icon: "⚽" },
+    { name: "Basketball", type: "Court Sport", icon: "🏀" },
+    { name: "Volleyball", type: "Team Sport", icon: "🏐" },
+    { name: "Kho-Kho", type: "Traditional Sport", icon: "🏃" },
+    { name: "Kabaddi", type: "Traditional Sport", icon: "🤼" },
+    { name: "Lawn Tennis", type: "Racquet Sport", icon: "🎾" },
+    { name: "Netball", type: "Team Sport", icon: "🏐" },
+    { name: "Throw Ball", type: "Team Sport", icon: "🏐" },
+    { name: "Cycling", type: "Outdoor Sport", icon: "🚴" },
+    { name: "Handball", type: "Team Sport", icon: "🤾" },
+    { name: "Pickleball", type: "Racquet Sport", icon: "🏓" },
+  ];
+
+  const indoorGames = [
+    { name: "Chess", type: "Strategy Game", icon: "♟️" },
+    { name: "Badminton", type: "Racquet Sport", icon: "🏸" },
+    { name: "Table Tennis", type: "Racquet Sport", icon: "🏓" },
+    { name: "Carrom", type: "Board Game", icon: "🎯" },
+    { name: "Billiards & Snooker", type: "Cue Sport", icon: "🎱" },
+    { name: "Gymnasium", type: "Fitness", icon: "🏋️" },
+    { name: "Aerobics & Yoga", type: "Fitness", icon: "🧘" },
+    { name: "Karate", type: "Martial Arts", icon: "🥋" },
+    { name: "Boxing", type: "Martial Arts", icon: "🥊" },
+    { name: "Taekwondo", type: "Martial Arts", icon: "🥋" },
+    { name: "Billard and Snooker", type: "Strategy Game", icon: "🎱" },
+  ];
+
+  const renderGames = (
+    games: { name: string; type: string; icon: string }[]
+  ) => (
+    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {games.map((game) => (
+        <Card
+          key={game.name}
+          className="p-5 transition-shadow hover:shadow-md"
+        >
+          <div className="flex items-center gap-4">
+            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-muted text-3xl">
+              {game.icon}
+            </div>
+            <div>
+              <h3 className="font-semibold">{game.name}</h3>
+              <p className="mt-1 text-sm text-muted-foreground">
+                {game.type}
+              </p>
+            </div>
+          </div>
+        </Card>
+      ))}
+    </div>
+  );
+
+
   return (
     <div>
       <PageHeader
@@ -46,7 +148,8 @@ function FacilitiesPage() {
         actions={
           <Button asChild variant="outline">
             <Link to="/campus-map">
-              <MapPin className="mr-2 h-4 w-4" /> View campus map
+              <MapPin className="mr-2 h-4 w-4" />
+              View campus map
             </Link>
           </Button>
         }
@@ -54,97 +157,129 @@ function FacilitiesPage() {
 
       <div className="mx-auto max-w-7xl px-4 py-10">
         <Tabs defaultValue="venues">
-          <TabsList>
-            <TabsTrigger value="venues">Facilities</TabsTrigger>
+          <TabsList className="flex h-auto flex-wrap gap-1">
+            <TabsTrigger value="venues">
+              Facilities
+            </TabsTrigger>
 
-            <TabsTrigger value="equipment">
-              <Package className="mr-1.5 h-4 w-4" />
-              Equipment
+            <TabsTrigger value="committee">
+              Institude Sports Committee
             </TabsTrigger>
           </TabsList>
 
-          {/* FACILITIES */}
-          <TabsContent
-            value="venues"
-            className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3"
-          >
-            {facilities.map((f) => (
-              <Card
-                key={f.id}
-                className="glass-card card-hover p-5"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10">
-                    <MapPin className="h-5 w-5 text-primary" />
-                  </div>
+         
+<TabsContent value="venues" className="mt-6">
+  <div className="space-y-8">
+    <section>
+      <div className="mb-5">
+        <h2 className="text-xl font-semibold">Outdoor Games</h2>
+        <p className="mt-1 text-sm text-muted-foreground">
+          Explore outdoor sports available at SGSITS.
+        </p>
+      </div>
+      {renderGames(outdoorGames)}
+    </section>
 
-                  <h3 className="text-lg font-bold text-primary">
-                    {f.name}
-                  </h3>
-                </div>
-              </Card>
+    <section>
+      <div className="mb-5">
+        <h2 className="text-xl font-semibold">Indoor Games</h2>
+        <p className="mt-1 text-sm text-muted-foreground">
+          Explore indoor sports and fitness activities at SGSITS.
+        </p>
+      </div>
+      {renderGames(indoorGames)}
+    </section>
+  </div>
+</TabsContent>
+
+
+
+
+<TabsContent value="committee" className="mt-6">
+  <div className="grid grid-cols-1 gap-6 xl:grid-cols-2">
+
+    {/* Faculty Sports Committee Card */}
+    <Card className="overflow-hidden">
+      <div className="p-6">
+        <h2 className="text-xl font-semibold">
+          Faculty Sports Committee
+        </h2>
+        <p className="mt-2 text-sm text-muted-foreground">
+          Faculty members and their designations at SGSITS.
+        </p>
+        <Badge variant="secondary" className="mt-4">
+          {committee.length} Members
+        </Badge>
+      </div>
+
+      <div className="max-h-[600px] overflow-auto">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>S. No.</TableHead>
+              <TableHead>Name</TableHead>
+              <TableHead>Designation</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {committee.map((member) => (
+              <TableRow key={member.no}>
+                <TableCell>{member.no}</TableCell>
+                <TableCell className="font-medium">
+                  {member.name}
+                </TableCell>
+                <TableCell className="text-muted-foreground">
+                  {member.designation}
+                </TableCell>
+              </TableRow>
             ))}
-          </TabsContent>
+          </TableBody>
+        </Table>
+      </div>
+    </Card>
 
-          {/* EQUIPMENT */}
-          <TabsContent value="equipment" className="mt-6">
-            <div className="overflow-x-auto rounded-2xl border border-border bg-card">
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Item</TableHead>
-                    <TableHead>Sport</TableHead>
-                    <TableHead className="text-center">Total</TableHead>
-                    <TableHead className="text-center">Issued</TableHead>
-                    <TableHead className="text-center">
-                      Available
-                    </TableHead>
-                    <TableHead>Condition</TableHead>
-                    <TableHead>Store</TableHead>
-                  </TableRow>
-                </TableHeader>
+    {/* Student Sports Committee Card */}
+    <Card className="overflow-hidden">
+      <div className="p-6">
+        <h2 className="text-xl font-semibold">
+          Student Sports Committee
+        </h2>
+        <p className="mt-2 text-sm text-muted-foreground">
+          Student representatives and their responsibilities.
+        </p>
+        <Badge variant="secondary" className="mt-4">
+          {studentCommittee.length} Members
+        </Badge>
+      </div>
 
-                <TableBody>
-                  {equipment.map((e) => (
-                    <TableRow key={e.id}>
-                      <TableCell className="font-medium">
-                        {e.name}
-                      </TableCell>
+      <div className="max-h-[600px] overflow-auto">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>S. No.</TableHead>
+              <TableHead>Name</TableHead>
+              <TableHead>Designation</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {studentCommittee.map((member) => (
+              <TableRow key={member.no}>
+                <TableCell>{member.no}</TableCell>
+                <TableCell className="font-medium">
+                  {member.name}
+                </TableCell>
+                <TableCell className="text-muted-foreground">
+                  {member.designation}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
+    </Card>
 
-                      <TableCell className="text-muted-foreground">
-                        {sportName(e.sport)}
-                      </TableCell>
-
-                      <TableCell className="text-center">
-                        {e.total}
-                      </TableCell>
-
-                      <TableCell className="text-center">
-                        {e.issued}
-                      </TableCell>
-
-                      <TableCell className="text-center font-semibold text-primary">
-                        {e.total - e.issued}
-                      </TableCell>
-
-                      <TableCell>
-                        <Badge
-                          variant="secondary"
-                          className="capitalize"
-                        >
-                          {e.condition}
-                        </Badge>
-                      </TableCell>
-
-                      <TableCell className="text-muted-foreground">
-                        {e.store}
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </div>
-          </TabsContent>
+  </div>
+</TabsContent>
         </Tabs>
       </div>
     </div>

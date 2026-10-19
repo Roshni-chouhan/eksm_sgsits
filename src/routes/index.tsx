@@ -52,7 +52,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Live scores, tournaments, Players, teams and Facilities for Shri Govindram Seksaria Institute of Technology and Science, Indore.",
+          "Live scores, tournaments, athletes, teams and facility booking for Shri Govindram Seksaria Institute of Technology and Science, Indore.",
       },
       {
         property: "og:title",
@@ -156,9 +156,9 @@ function Home() {
               },
               {
                 icon: UserPlus,
-                title: "Player profiles",
+                title: "Athlete profiles",
                 copy: "Stats, medals and achievements",
-                to: "/Players" as const,
+                to: "/athletes" as const,
               },
               {
                 icon: ShieldCheck,
@@ -168,7 +168,7 @@ function Home() {
               },
               {
                 icon: CalendarCheck,
-                title: "Facilities",
+                title: "Facility booking",
                 copy: "Courts, grounds and time slots",
                 to: "/facilities" as const,
               },
@@ -321,7 +321,7 @@ function Home() {
               <p className="ks-eyebrow">SPORTS MANAGEMENT</p>
 
               <h2 className="ks-section-title">
-                Everything Players and organisers need
+                Everything players and organisers need
               </h2>
 
               <p className="ks-section-description">
@@ -419,13 +419,13 @@ function Home() {
             />
 
             <h2 className="mt-5 text-2xl font-bold text-primary sm:text-3xl">
-              One ecosystem for every Player on campus
+              One ecosystem for every player on campus
             </h2>
 
             <p className="mt-3 text-sm text-muted-foreground">
               From your first departmental trial to a digitally verifiable
-              championship certificate, Eklavya Khel Spardha Manch tracks every match, stat,
-              medal and achievement of your SGSITS career.
+              championship certificate, Eklavya Khel Spardha Manch tracks every
+              match, stat, medal and achievement of your SGSITS career.
             </p>
 
             <div className="mt-6 flex flex-wrap gap-3">
@@ -486,7 +486,7 @@ function Home() {
         </div>
       </section>
 
-      {/* TOP PlayerS */}
+      {/* TOP PLAYERS */}
 
       <section className="mx-auto mt-20 max-w-7xl px-4">
         <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 sm:flex sm:justify-between">

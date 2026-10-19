@@ -98,13 +98,11 @@ const YEARS = [
   "Post graduate",
 ];
 
-// Institute Sports Committee / faculty designations
 const DESIGNATIONS = [
   "Institute Sports Committee",
   "Head of Department",
 ];
 
-// Super Admin designations
 const SUPERADMIN_DESIGNATIONS = [
   "Deputy Director Physical Education",
   "Sports President",
@@ -213,7 +211,6 @@ function AuthPage() {
   const router = useRouter();
 
   const [desk, setDesk] = useState<Desk>(DESKS[0]!);
-
   const [signInBusy, setSignInBusy] = useState(false);
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
@@ -221,17 +218,11 @@ function AuthPage() {
   const [regBusy, setRegBusy] = useState(false);
   const [branch, setBranch] = useState<string>(BRANCHES[0]!);
   const [year, setYear] = useState<string>(YEARS[2]!);
-
-  // Institute Sports Committee designation
   const [designation, setDesignation] = useState<string>(
     DESIGNATIONS[0]!,
   );
-
-  // Super Admin designation — selectable
   const [superAdminDesignation, setSuperAdminDesignation] =
     useState<string>("");
-
-  // Core Team designation
   const [coreTeamDesignation, setCoreTeamDesignation] =
     useState<string>("");
 
@@ -264,12 +255,8 @@ function AuthPage() {
     }
 
     toast.success("Welcome back to Eklavya Khel Spardha Manch");
-
     await router.invalidate();
-
-    void navigate({
-      to: "/my-dashboard",
-    });
+    void navigate({ to: "/my-dashboard" });
   }
 
   async function handleSignIn(
@@ -303,10 +290,7 @@ function AuthPage() {
         return;
       }
 
-      await finishSignIn(
-        res.accessToken,
-        res.refreshToken,
-      );
+      await finishSignIn(res.accessToken, res.refreshToken);
     } catch {
       toast.error("Something went wrong. Please try again.");
     } finally {
@@ -358,17 +342,13 @@ function AuthPage() {
           email,
           password: regPassword,
           phone,
-
-          // Preserve the existing registration payload structure.
           year: isSuperAdmin
             ? superAdminDesignation
             : isFaculty
               ? designation
               : year,
-
           branch,
           role: desk.role,
-
           ...(isCoreTeam
             ? {
                 designation:
@@ -489,7 +469,6 @@ function AuthPage() {
                 </span>
 
                 <p className="relative font-semibold">{d.title}</p>
-
                 <p className="relative mt-1 text-xs text-muted-foreground">
                   {d.blurb}
                 </p>
@@ -514,7 +493,6 @@ function AuthPage() {
             </TabsTrigger>
           </TabsList>
 
-          {/* SIGN IN */}
           <TabsContent value="signin" className="mt-6">
             <Card className="glass-card mx-auto max-w-xl overflow-hidden p-0">
               <div className="gradient-royal px-6 py-4">
@@ -566,7 +544,6 @@ function AuthPage() {
                     >
                       {signInBusy ? "Signing in…" : "Sign in"}
                     </Button>
-
                     <Button
                       type="button"
                       variant="link"
@@ -580,7 +557,6 @@ function AuthPage() {
             </Card>
           </TabsContent>
 
-          {/* REGISTRATION */}
           <TabsContent value="register" className="mt-6">
             <Card className="glass-card border-t-4 border-t-gold p-6">
               <form
@@ -652,7 +628,6 @@ function AuthPage() {
                     </Select>
                   </div>
 
-                  {/* SEPARATE DESIGNATION / YEAR DROPDOWNS */}
                   <div className="space-y-2">
                     <Label>
                       {isCoreTeam
