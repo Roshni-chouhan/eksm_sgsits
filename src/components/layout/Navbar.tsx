@@ -17,6 +17,7 @@ import {
   Volleyball,
   Info,
 } from "lucide-react";
+import logo from "@/assets/unisports-logo.png";
 
 type NavLink = {
   label: string;
@@ -41,12 +42,12 @@ const navigation: (NavLink | NavGroup)[] = [
     ],
   },
   {
-  label: "Tournaments",
-  items: [
-    { label: "All Tournaments", to: "/tournaments", icon: Trophy },
-    { label: "Teams", to: "/teams", icon: Users },
-    { label: "Fixtures", to: "/fixture", icon: CalendarDays },
-  ],
+    label: "Tournaments",
+    items: [
+      { label: "All Tournaments", to: "/tournaments", icon: Trophy },
+      { label: "Teams", to: "/teams", icon: Users },
+      { label: "Fixtures", to: "/fixture", icon: CalendarDays },
+    ],
   },
   { label: "Players", to: "/players" },
   {
@@ -122,21 +123,24 @@ export function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur-xl">
-      <div className="mx-auto flex h-[76px] max-w-[1440px] items-center px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex h-24 max-w-[1440px] items-center px-4 sm:px-6 lg:px-8">
+        {/* Brand and logo */}
         <Link
           to="/"
           className="flex shrink-0 items-center gap-3"
           onClick={closeMenus}
         >
           <img
-            src="/favicon.png"
-            alt="Khel Sankalp"
-            className="h-12 w-12 object-contain"
+            src={logo}
+            alt="Khel Sankalp logo"
+            width={80}
+            height={80}
+            className="h-12 w-12 shrink-0 object-contain"
           />
 
           <div className="hidden sm:block">
             <div className="font-display text-xl font-bold leading-none text-primary">
-              Eklavya Khel Spardha Manch
+              Khel Sankalp
             </div>
             <div className="mt-1 text-[10px] font-semibold tracking-[0.18em] text-muted-foreground">
               SGSITS INDORE
@@ -186,7 +190,6 @@ export function Navbar() {
                   }`}
                 >
                   {item.label}
-
                   <ChevronDown
                     className={`h-3.5 w-3.5 transition-transform ${
                       open ? "rotate-180" : ""
@@ -313,7 +316,6 @@ export function Navbar() {
                     }`}
                   >
                     {item.label}
-
                     <ChevronDown
                       className={`h-4 w-4 transition-transform ${
                         open ? "rotate-180" : ""
