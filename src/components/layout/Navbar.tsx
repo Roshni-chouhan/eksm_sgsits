@@ -1,3 +1,4 @@
+
 import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "@tanstack/react-router";
 import {
@@ -60,6 +61,7 @@ const navigation: (NavLink | NavGroup)[] = [
       { label: "About", to: "/about", icon: Info },
     ],
   },
+  { label: "Explore Demo", to: "/demo" },
 ];
 
 function isGroup(item: NavLink | NavGroup): item is NavGroup {
@@ -124,7 +126,6 @@ export function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur-xl">
       <div className="mx-auto flex h-24 max-w-[1440px] items-center px-4 sm:px-6 lg:px-8">
-        {/* Brand and logo */}
         <Link
           to="/"
           className="flex shrink-0 items-center gap-3"
@@ -148,7 +149,6 @@ export function Navbar() {
           </div>
         </Link>
 
-        {/* Desktop navigation */}
         <nav
           ref={desktopNavRef}
           className="ml-8 hidden flex-1 items-center justify-center gap-1 xl:flex"
@@ -180,9 +180,7 @@ export function Navbar() {
                   type="button"
                   aria-expanded={open}
                   aria-haspopup="true"
-                  onClick={() =>
-                    setDesktopGroup(open ? null : item.label)
-                  }
+                  onClick={() => setDesktopGroup(open ? null : item.label)}
                   className={`inline-flex items-center gap-1 whitespace-nowrap rounded-full px-3 py-2 text-sm font-semibold transition ${
                     active || open
                       ? "bg-primary/10 text-primary"
@@ -214,9 +212,7 @@ export function Navbar() {
                                 : "text-foreground hover:bg-muted hover:text-primary"
                             }`}
                           >
-                            {Icon && (
-                              <Icon className="h-4 w-4 shrink-0" />
-                            )}
+                            {Icon && <Icon className="h-4 w-4 shrink-0" />}
                             {child.label}
                           </Link>
                         );
@@ -229,7 +225,6 @@ export function Navbar() {
           })}
         </nav>
 
-        {/* Desktop actions */}
         <div className="ml-auto hidden items-center gap-2 xl:flex">
           <button
             type="button"
@@ -258,7 +253,6 @@ export function Navbar() {
           </Link>
         </div>
 
-        {/* Mobile menu button */}
         <button
           type="button"
           onClick={() => {
@@ -269,15 +263,10 @@ export function Navbar() {
           aria-label="Toggle menu"
           aria-expanded={mobileOpen}
         >
-          {mobileOpen ? (
-            <X className="h-6 w-6" />
-          ) : (
-            <Menu className="h-6 w-6" />
-          )}
+          {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
       </div>
 
-      {/* Mobile navigation */}
       {mobileOpen && (
         <div className="border-t border-border bg-background px-4 py-4 xl:hidden">
           <nav className="grid gap-1 sm:grid-cols-2">
@@ -306,9 +295,7 @@ export function Navbar() {
                   <button
                     type="button"
                     aria-expanded={open}
-                    onClick={() =>
-                      setMobileGroup(open ? null : item.label)
-                    }
+                    onClick={() => setMobileGroup(open ? null : item.label)}
                     className={`flex w-full items-center justify-between rounded-xl px-4 py-3 text-left text-sm font-semibold ${
                       groupIsActive(item)
                         ? "bg-primary/10 text-primary"
