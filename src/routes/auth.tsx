@@ -105,7 +105,7 @@ const DESIGNATIONS = [
 
 const SUPERADMIN_DESIGNATIONS = [
   "Deputy Director Physical Education",
-  "Sports President",
+  "Sports Co-ordinator",
   "Director",
 ];
 
