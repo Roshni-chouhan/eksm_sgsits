@@ -1,153 +1,79 @@
-# Khel Sankalp — SGSITS Sports Tournament Management System
+# Eklavya Khel Spardha Manch (EKSM)
 
-**Khel Sankalp** is a digital sports tournament management platform developed specifically for **Shri Govindram Seksaria Institute of Technology and Science (SGSITS), Indore**.
+**A Digital Platform for College Sports Management**
 
-The system provides a centralized platform for managing college sports tournaments, Players, teams, fixtures, live matches, results, facilities, announcements, achievements and sports-related activities.
+Eklavya Khel Spardha Manch (EKSM) is a web-based sports management platform designed to organize and present college sports activities through a centralized interface. It aims to make sports information, tournaments, athletes, teams, facilities, and match-related updates easier to access.
 
-> **योगः कर्मसु कौशलम्।**
->
-> *Excellence in action. Every sport. Every Player. Every achievement.*
+## Overview
 
----
+The project provides a user-friendly interface for managing and exploring sports-related information. It is designed around different user roles and sports management workflows.
 
-## 📌 Project Overview
+## Key Features
 
-Khel Sankalp is designed to digitize and streamline the sports ecosystem of SGSITS.
+- **Sports & Tournaments:** Explore sports activities and tournament information.
+- **Athlete Management:** View athlete profiles and related information.
+- **Team Management:** Browse teams and team profiles.
+- **Schedules & Results:** Present match schedules, scores, and results where available.
+- **Sports Facilities:** Explore sports facilities and ground information.
+- **Announcements:** Display important sports-related updates.
+- **Role-Based Dashboards:** Interfaces for athletes, organizers, and administrators.
+- **Responsive Interface:** Designed for convenient use across different screen sizes.
 
-Instead of managing tournament information, registrations, fixtures, match results, Player records and announcements through disconnected/manual processes, Khel Sankalp brings these activities into a unified web application.
+*Feature availability depends on the current implementation. Backend-dependent operations may require additional integration.*
 
-The platform supports:
+## Technology Stack
 
-- Sports and tournament management
-- Player and team management
-- Tournament registration
-- Fixture and match management
-- Live scores
-- Match events and results
-- Points tables and rankings
-- Player statistics and achievements
-- Digital certificates
-- Sports facilities
-- Equipment management
-- Announcements and notifications
-- Administrative dashboards
-- Department-wise sports information
+- React
+- TypeScript
+- Vite
+- Tailwind CSS
+- React Router / project-configured routing
+- Lucide Icons and other UI libraries used in the project
 
----
+## Getting Started
 
-# 🎯 Objectives
+### Prerequisites
 
-The primary objectives of Khel Sankalp are:
+Install Node.js and npm before running the project.
 
-1. Digitize SGSITS college sports tournament management.
-2. Provide a centralized database for Players, teams and tournaments.
-3. Simplify tournament registration and fixture management.
-4. Provide live match scores and match information.
-5. Maintain Player performance and achievement records.
-6. Provide transparent tournament results and rankings.
-7. Improve communication through announcements and notifications.
-8. Digitize sports facilities and equipment management.
-9. Provide role-based dashboards for sports administration.
-10. Create a scalable architecture for future integration with production backend services.
+### Installation
 
----
+1. Clone the repository:
 
-# 🔄 Working Flow
+   ```bash
+   git clone https://github.com/Roshni-chouhan/eksm_sgsits.git
+   ```
 
-## 1. User Visits Khel Sankalp
+2. Navigate to the project directory:
 
-The user opens the Khel Sankalp web application and accesses the public sports ecosystem.
+   ```bash
+   cd eksm_sgsits
+   ```
 
-```text
-Home
-  ↓
-Explore Sports
-  ↓
-Tournaments / Players / Teams
-  ↓
-View Details
+3. Install dependencies:
 
-# 🛠️ Frontend Technologies
+   ```bash
+   npm install
+   ```
 
-Khel Sankalp frontend is developed using modern web technologies for a responsive, interactive and maintainable user interface.
+4. Start the development server:
 
-### Languages
+   ```bash
+   npm run dev
+   ```
 
-- **TypeScript** — Main programming language
-- **HTML5** — Web page structure
-- **CSS3** — Styling and responsive design
+5. Open the local URL displayed in your terminal.
 
-### Frontend Framework & Build Tool
+If the application is located in a `frontend` subfolder, run the installation and development commands from that folder instead.
 
-- **React.js** — Component-based UI development
-- **Vite** — Development server and production build tool
+## Project Status
 
-### Styling & UI
+The current project contains the frontend application. Backend services, database connectivity, and authentication integrations should be considered configured only after they have been implemented and verified.
 
-- **Tailwind CSS** — Utility-first CSS framework
-- **shadcn/ui** — Reusable UI components
-- **Radix UI** — Accessible UI primitives
-- **Lucide React** — Icons
+## Repository
 
-### Routing
+GitHub: https://github.com/Roshni-chouhan/eksm_sgsits
 
-- **TanStack Router** — Application routing and navigation
+## Project Name
 
-### Data Visualization
-
-- **Recharts** — Charts and analytics visualization
-
-### Development Tools
-
-- **Visual Studio Code (VS Code)** — Code editor
-- **npm** — Package and dependency management
-- **Git** — Version control
-- **GitHub** — Source code repository and collaboration
-- **Vercel** — Frontend deployment
-
----
-
-# 💻 Development Environment
-
-### Recommended Tools
-
-| Tool | Purpose |
-|---|---|
-| Visual Studio Code | Development and code editing |
-| Node.js | JavaScript runtime |
-| npm | Dependency management |
-| Git | Version control |
-| GitHub | Repository and source-code management |
-| Vite | Frontend development server |
-| Vercel | Deployment |
-
----
-Frontend Technology Stack Summary
-
-# 🚀 Running the Frontend Locally
-
-Frontend
-│
-├── React.js
-├── TypeScript
-├── HTML5
-├── CSS3
-├── Tailwind CSS
-├── shadcn/ui
-├── Radix UI
-├── Lucide React
-├── TanStack Router
-├── Recharts
-└── Vite
-
-Development
-│
-├── VS Code
-├── Node.js
-├── npm
-└── Git
-
-Repository & Deployment
-│
-├── GitHub
-└── Vercel
+**Eklavya Khel Spardha Manch (EKSM)**
